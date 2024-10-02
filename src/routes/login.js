@@ -1,5 +1,5 @@
-const express = require("express")
-const loginRouter = express.Router();
+import { Router } from "express";
+const loginRouter = Router();
 
 const timeLog = (req, res, next) => {
     console.log('Login')
@@ -12,7 +12,7 @@ loginRouter.use(timeLog)
 loginRouter.get('/',(req,res) => {
     res.send('Pantalla de login')
 })
-
+ 
 //Defining register
 
-module.exports = loginRouter
+export default loginRouter

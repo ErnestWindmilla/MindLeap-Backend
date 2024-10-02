@@ -1,10 +1,13 @@
-const express = require("express")
-const router = express.Router()
-const adminRouter = require('./admin')
-const userRouter = require('./users')
-const loginRouter = require('./login')
+import { Router } from "express"
+
+const router = Router()
+
+import adminRouter from './admin.js'
+import userRouter from './users.js'
+import loginRouter from './login.js'
 
 router.use('/admin',adminRouter)
 router.use('/users',userRouter)
 router.use('/login',loginRouter)
-module.exports = router
+
+export default router

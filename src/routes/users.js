@@ -1,5 +1,5 @@
-const express = require("express")
-const userRouter = express.Router();
+import { Router } from "express";
+const userRouter = Router();
 
 //Middleware specific to this router
 
@@ -19,7 +19,7 @@ userRouter.get('/settings', (req, res) => {
     res.send('Pantalla de configuracion de usuario')
 })
 
-module.exports = userRouter
+export default userRouter
 
 // app.get('/', function(req, res){
 //     res.send("Hello world!");

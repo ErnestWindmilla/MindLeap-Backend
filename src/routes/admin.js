@@ -1,6 +1,7 @@
-const express = require('express')
-const userRouter = require('./users')
-const adminRouter = express.Router()
+
+import { Router } from 'express'
+import userRouter from './users.js'
+const adminRouter = Router()
 
 const timeLog = (req, res, next) => {
     console.log('Admin')
@@ -12,9 +13,10 @@ adminRouter.use(timeLog)
 //Defining home for amdin
 adminRouter.get('/', (req, res) => {
     res.send('Pantalla de inicio para un admin')
+   
 })
 
-//Defining crud (?)
+//Defining html methods
 
 adminRouter.route('/panel')
 .get( (req, res) =>{
@@ -27,4 +29,4 @@ adminRouter.route('/panel')
     res.send('Putting update to user')
 })
 
-module.exports = adminRouter
+export default adminRouter
