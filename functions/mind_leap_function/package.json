@@ -1,0 +1,23 @@
+{
+	"name": "mind_leap_function",
+	"version": "1.0.0",
+	"main": "index.js",
+	"author": "emolina@quickapps.mx",
+	"dependencies": {
+		"bcrypt": "^5.1.1",
+		"cookie-parser": "^1.4.6",
+		"cors": "^2.8.5",
+		"express": "^4.21.0",
+		"jsonwebtoken": "^9.0.2",
+		"zcatalyst-sdk-node": "^2.5.1",
+		"zod": "^3.23.8"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "nodemon index.js"
+	},
+	"devDependencies": {
+		"db-local": "^3.1.0",
+		"standard": "^17.1.2"
+	}
+}

@@ -1,0 +1,37 @@
+[debug] [2024-10-04T23:48:51.296Z] : 
+[debug] [2024-10-04T23:48:51.297Z] : ----------------------------------------------------------------------
+[debug] [2024-10-04T23:48:51.297Z] : Command:      C:\Program Files\nodejs\node.exe C:\Users\cesar\AppData\Roaming\npm\node_modules\zcatalyst-cli\lib\bin\catalyst.js serve
+[debug] [2024-10-04T23:48:51.298Z] : CLI Version:  1.17.6
+[debug] [2024-10-04T23:48:51.298Z] : Platform:     win32
+[debug] [2024-10-04T23:48:51.298Z] : Node Version: v20.16.0
+[debug] [2024-10-04T23:48:51.298Z] : Time:         Fri Oct 04 2024 17:48:51 GMT-0600 (hora estándar central)
+[debug] [2024-10-04T23:48:51.299Z] : ----------------------------------------------------------------------
+[debug] [2024-10-04T23:48:51.299Z] : 
+[debug] [2024-10-04T23:48:51.940Z] : > authorizing via signed-in user option
+[debug] [2024-10-04T23:48:51.940Z] : > command requires scopes: ["ZohoCatalyst.projects.ALL","ZohoCatalyst.functions.ALL","ZohoCatalyst.functions.EXECUTE","ZohoCatalyst.webapp.ALL","ZohoCatalyst.pdfshot.execute","ZohoCatalyst.authentication.CREATE"]
+[debug] [2024-10-04T23:48:51.951Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075 
+
+[debug] [2024-10-04T23:48:52.205Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 04 Oct 2024 23:48:51 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"keep-alive","set-cookie":["zalb_46512fd555=c3d5ec374d3dc932973a3d50f55d8d00; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=dd271521-a051-4cfb-a22f-f9f8f2ec34ad;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=dd271521-a051-4cfb-a22f-f9f8f2ec34ad;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-10-04T23:48:52.207Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075/environment 
+
+[debug] [2024-10-04T23:48:52.307Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 04 Oct 2024 23:48:51 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"keep-alive","set-cookie":["zalb_46512fd555=bbdfb771565421abbe10f7a180903d28; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=8d71e8dc-49b3-483c-8f52-4919ae6006bb;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=8d71e8dc-49b3-483c-8f52-4919ae6006bb;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-10-04T23:48:52.480Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075/function 
+Query params: {"type":"basicio,event,cron,applogic,integration,browser_logic"}
+
+[debug] [2024-10-04T23:48:52.565Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 04 Oct 2024 23:48:52 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"keep-alive","set-cookie":["zalb_46512fd555=4ead9897700827f973c0f7dbded7f673; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=bc81ca97-b655-4651-82ef-bec2fcba2357;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=bc81ca97-b655-4651-82ef-bec2fcba2357;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-10-04T23:48:52.566Z] : unknown eol undefined hence skipping check
+[warn] [2024-10-04T23:48:57.886Z] : ‼ skipping serve of function [package] since there is no valid catalyst-config.json file present
+[info] [2024-10-04T23:48:58.494Z] : 
+[info] [2024-10-04T23:48:58.494Z] :  >>>>>>>>>>>>> AdvancedIO <<<<<<<<<<<< 
+[info] [2024-10-04T23:48:58.494Z] : i mind_leap_function: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-04T23:48:58.495Z] : 
+[info] [2024-10-04T23:49:35.715Z] : 
+change of src\routes\login.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-04T23:49:46.275Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-04T23:49:46.275Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/

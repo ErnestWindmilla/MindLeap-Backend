@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "targets": [
+      "package",
+      "mind_leap_function"
+    ],
+    "ignore": [],
+    "source": "functions"
+  }
+}
