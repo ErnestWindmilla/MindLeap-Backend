@@ -1,0 +1,20 @@
+const express = require('express')
+const catalyst= require('zcatalyst-sdk-node')
+const app = express()
+
+//Para inicializar "conectar" la base de datos es con
+// catalyst.initialize(req)
+
+const PrimerMiddleware = (req, res, next) => {
+    cat = catalyst.initialize(req)
+    console.log('Funciona el middleware improvisado')
+    next()
+}
+
+app.use(PrimerMiddleware)
+
+app.listen(3000, (req, res) => {
+    console.log('Probando middleware')
+})
+
+module.exports = PrimerMiddleware

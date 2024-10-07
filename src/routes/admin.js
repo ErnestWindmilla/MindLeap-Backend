@@ -11,7 +11,7 @@ adminRouter.use(timeLog)
 
 //Defining home for amdin
 adminRouter.get('/', (req, res) => {
-    res.send('Pantalla de inicio para un admin')
+    //res.send('Pantalla de inicio para un admin')
 })
 
 //Defining crud (?)
