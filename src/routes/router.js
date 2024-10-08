@@ -7,5 +7,7 @@ const catalyst = require('zcatalyst-sdk-node');
 
 router.use('/admin',adminRouter)
 router.use('/users',userRouter)
-router.use('/login',loginRouter)
+router.use('',loginRouter)
+
+
 module.exports = router

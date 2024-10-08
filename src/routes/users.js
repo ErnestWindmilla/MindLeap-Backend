@@ -16,7 +16,7 @@ userRouter.get('/', (req, res) => {
 })
 //Defining about in the oage
 userRouter.get('/settings', (req, res) => {
-    res.send('Pantalla de configuracion de usuario')
+   // res.send('Pantalla de configuracion de usuario')
 })
 
 module.exports = userRouter
