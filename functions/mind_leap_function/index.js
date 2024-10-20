@@ -1,8 +1,11 @@
+require('dotenv').config();
+
 const express = require('express');
 const catalyst = require('zcatalyst-sdk-node');
 const router = require('./src/routes/router'); 
 //const searchQuery  = require('./src/models/user')
 const cookieParser = require('cookie-parser')
+
 
 const app = express()
 
@@ -10,8 +13,10 @@ const app = express()
 app.use( express.json())
 app.use( cookieParser() )
 
-app.use(router, (req, res) => {
+ 
 
+app.use(router, (req, res) => {
+	
 	let cat = catalyst.initialize(req)
 	let searchQuery = {
 		"search" : "$usuarios",
@@ -23,10 +28,10 @@ app.use(router, (req, res) => {
 	datastore_service = cat.datastore()
 	cat.search().executeSearchQuery(searchQuery).then(resp =>{
 		//Your processing logic here
-		res.send('Si jala ahora tambien')
+		res.send('ya jala')
 		}).catch(err =>{
 		//Your error logic here
-		res.send('No jala la vaina')
+		res.send( 'aun Jala' )
 		});
 
 // let cat = catalyst.initialize(req);

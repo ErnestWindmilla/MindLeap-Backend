@@ -1,11 +1,24 @@
 const express = require("express")
 const router = express.Router()
-const adminRouter = require('./admin')
-const userRouter = require('./users')
-const loginRouter = require('./login')
-const catalyst = require('zcatalyst-sdk-node');
+const userPrincipalRouter = require('./userPrincipal')
 
-router.use('/admin',adminRouter)
-router.use('/users',userRouter)
-router.use('',loginRouter)
+const UserTuteeRouter = require("./userTutee")
+const TaskRouter = require("./tasks" )
+const asignTaskRouter = require('./asingnTasks')
+const assignMasterRouter = require('./assignMaster')
+
+const { sessionInfo } = require('../middleware/sessionInfo' )
+
+//check the session
+router.use( sessionInfo );
+
+
+//router.use('/admin',adminRouter)
+router.use('/userPrincipal',userPrincipalRouter)
+//router.use('',loginRouter)
+router.use('/asignTask' ,asignTaskRouter )
+router.use('/assignMaster' , assignMasterRouter )
+router.use('/userTutee' , UserTuteeRouter)
+router.use('/task' , TaskRouter )
+
 module.exports = router

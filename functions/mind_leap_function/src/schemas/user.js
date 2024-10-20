@@ -6,6 +6,9 @@ const userSchema = z.object({
     required_error: 'Username is required.'
   }),
 
+  email: z.string( {  required_error: 'Email is required' , invalid_type_error: 'password must be a string'  }),
+
+
   password: z.string({    invalid_type_error: 'password must be a string',  }).
   min(6 , { message: "Must be 5 or more characters long" }),
   
@@ -14,6 +17,7 @@ const userSchema = z.object({
 function validateUser (input) {
   return userSchema.safeParse(input)
 }
+
 
 function validatePartialUser (input) {
   return userSchema.partial().safeParse(input)
