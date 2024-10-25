@@ -5,6 +5,8 @@ const catalyst = require('zcatalyst-sdk-node');
 const router = require('./src/routes/router'); 
 //const searchQuery  = require('./src/models/user')
 const cookieParser = require('cookie-parser')
+const cors = require('cors');
+
 
 
 const app = express()
@@ -12,7 +14,11 @@ const app = express()
 // Middleware para procesar los json
 app.use( express.json())
 app.use( cookieParser() )
-
+app.use(cors({
+	origin: 'http://localhost:8080',//'*',  // Cambia esto por el origen del frontend (dominio o puerto)
+	credentials: true ,
+	exposedHeaders: ['set-cookie']               // Permitir credenciales (como cookies) en solicitudes cross-origin
+  }));
  
 
 app.use(router, (req, res) => {

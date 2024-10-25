@@ -1,4 +1,4 @@
-const  {  validateUserTutee , validatePartialUserTutee } = require('../schemas/userTutee')
+const  {  validateUser , validatePartialUser } = require('../schemas/user')
 const { userPrincipalModel } = require('../models/userPrincipal' )
 const jwt =  require( 'jsonwebtoken' )
 
@@ -36,7 +36,7 @@ class userPrincipalController {
     // Create
     static async  create  (req,res)  {
        
-        const result = validateUserTutee( req.body )
+        const result = validateUser( req.body )
         
         if (!result.success) {
             // 422 Unprocessable Entity
@@ -68,7 +68,7 @@ class userPrincipalController {
 
     // update
     static async  update  (req,res)  {
-        const result = validatePartialUserTutee( req.body )
+        const result = validatePartialUser( req.body )
         const { id } = req.params
         if (!result.success) {
             // 422 Unprocessable Entity
@@ -89,7 +89,7 @@ class userPrincipalController {
     static async  login  (req,res)  {
         const { username , password } = req.body
         const { user } = req.session
-       
+      
         if ( user ) return res.status(400).json({ "msg" : "Already Login , logout" , "user" : req.session})
 
         try {
@@ -101,13 +101,25 @@ class userPrincipalController {
                 process.env.SECRET_JWT_KEY ,
              { expiresIn :"1h" }
          )
-         
+
+         res.cookie('user',userPrincipal, {
+            httpOnly: false, // Cambiado a false para pruebas
+            secure: false,   // Cambiado a false si no usas HTTPS
+            //sameSite: 'None',
+            maxAge: 1000 * 60 * 60 // 1 hora
+        })
+        
+        
+        
          res.cookie('access_token' , token ,{
              httpOnly : true,
+             secure: false,
              //sameSite: 'strict' ,
              maxAge: 1000 * 60 * 60 // valida por una hora
      
-         } ).send ( {userPrincipal} )
+         } )
+         console.log("Cookies actuales despues del login: ", req.cookies);
+         res.send ( {userPrincipal} )
          
         }catch (error){
          // Manejar el Error
@@ -116,7 +128,27 @@ class userPrincipalController {
     }
 
     static async  logout  (req,res)  {
-        res.clearCookie('access_token').json({ "msg" : 'logout'})
+      
+       // Debug: Mostrar las cookies actuales
+        console.log("Cookies actuales: ", req.cookies);
+
+        // Borrar la cookie 'user'
+        res.clearCookie('user', {
+            httpOnly: false,  // Igual que en la creación
+            secure: false,    // Mismo valor que en la creación
+            path: '/'         // Asegúrate de que coincida el path
+        });
+
+        // Borrar la cookie 'access_token'
+        res.clearCookie('access_token', {
+            httpOnly: true,   // Mismo valor que en la creación
+            secure: false,    // Igual que en la creación
+            path: '/'         // El path debe coincidir
+        });
+
+        // Respuesta al cliente confirmando que se eliminaron las cookies
+        res.status(200).json({ message: 'Sesión cerrada y cookies eliminadas' });
+        
      }
 
 

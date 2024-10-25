@@ -7,12 +7,16 @@ const sessionInfo = (req , res , next) => {
     try {
         const data = jwt.verify( token , process.env.SECRET_JWT_KEY )
         req.session.user = data
+
+        conosole.log( "Datos de session",req.session )
     }catch (err) {
         // debug
         console.log("No Session ");
     }
 
-    next()
+    console.log("Cookies actuales: ", req.cookies);
+
+    next()  
 };
 
 

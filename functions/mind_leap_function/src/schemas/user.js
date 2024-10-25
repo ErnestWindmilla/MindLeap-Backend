@@ -10,7 +10,11 @@ const userSchema = z.object({
 
 
   password: z.string({    invalid_type_error: 'password must be a string',  }).
-  min(6 , { message: "Must be 5 or more characters long" }),
+  min(6 , { message: "Must be 5 or more characters long" })
+  .regex(/[A-Z]/, "La contraseña debe contener al menos una letra mayúscula")
+  .regex(/[a-z]/, "La contraseña debe contener al menos una letra minúscula")
+  .regex(/[0-9]/, "La contraseña debe contener al menos un número")
+  .regex(/[\W_]/, "La contraseña debe contener al menos un carácter especial"),
   
 })
 

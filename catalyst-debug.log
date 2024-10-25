@@ -1,0 +1,220 @@
+[debug] [2024-10-24T21:30:45.452Z] : 
+[debug] [2024-10-24T21:30:45.453Z] : ----------------------------------------------------------------------
+[debug] [2024-10-24T21:30:45.453Z] : Command:      C:\Program Files\nodejs\node.exe C:\Users\cesar\AppData\Roaming\npm\node_modules\zcatalyst-cli\lib\bin\catalyst.js serve
+[debug] [2024-10-24T21:30:45.453Z] : CLI Version:  1.17.6
+[debug] [2024-10-24T21:30:45.454Z] : Platform:     win32
+[debug] [2024-10-24T21:30:45.454Z] : Node Version: v20.16.0
+[debug] [2024-10-24T21:30:45.454Z] : Time:         Thu Oct 24 2024 15:30:45 GMT-0600 (hora estándar central)
+[debug] [2024-10-24T21:30:45.454Z] : ----------------------------------------------------------------------
+[debug] [2024-10-24T21:30:45.454Z] : 
+[debug] [2024-10-24T21:30:46.356Z] : > authorizing via signed-in user option
+[debug] [2024-10-24T21:30:46.356Z] : > command requires scopes: ["ZohoCatalyst.projects.ALL","ZohoCatalyst.functions.ALL","ZohoCatalyst.functions.EXECUTE","ZohoCatalyst.webapp.ALL","ZohoCatalyst.pdfshot.execute","ZohoCatalyst.authentication.CREATE"]
+[debug] [2024-10-24T21:30:46.368Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075 
+
+[debug] [2024-10-24T21:30:46.825Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Thu, 24 Oct 2024 21:30:46 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"keep-alive","set-cookie":["zalb_46512fd555=4ead9897700827f973c0f7dbded7f673; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=812d5405-3c17-41a3-ab46-412d5c884209;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=812d5405-3c17-41a3-ab46-412d5c884209;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-10-24T21:30:46.828Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075/environment 
+
+[debug] [2024-10-24T21:30:46.983Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Thu, 24 Oct 2024 21:30:46 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"keep-alive","set-cookie":["zalb_46512fd555=c3d5ec374d3dc932973a3d50f55d8d00; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=34c3b2c9-66f6-4104-9bde-fffc0febe3b3;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=34c3b2c9-66f6-4104-9bde-fffc0febe3b3;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-10-24T21:30:47.247Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075/function 
+Query params: {"type":"basicio,event,cron,applogic,integration,browser_logic"}
+
+[debug] [2024-10-24T21:30:47.421Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Thu, 24 Oct 2024 21:30:47 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"keep-alive","set-cookie":["zalb_46512fd555=bbdfb771565421abbe10f7a180903d28; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=c068b89e-ba64-42ba-95e1-e26e21382bb6;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=c068b89e-ba64-42ba-95e1-e26e21382bb6;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-10-24T21:30:47.423Z] : unknown eol undefined hence skipping check
+[warn] [2024-10-24T21:30:53.247Z] : ‼ skipping serve of function [package] since there is no valid catalyst-config.json file present
+[info] [2024-10-24T21:30:53.395Z] : 
+[info] [2024-10-24T21:30:53.395Z] :  >>>>>>>>>>>>> AdvancedIO <<<<<<<<<<<< 
+[info] [2024-10-24T21:30:53.396Z] : i mind_leap_function: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T21:30:53.396Z] : 
+[info] [2024-10-24T21:36:16.529Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T21:36:27.576Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T21:36:27.583Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T21:36:28.592Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T21:36:38.565Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T21:36:38.566Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T21:51:18.720Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T21:51:29.637Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T21:51:29.637Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T21:51:30.652Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T21:51:42.355Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T21:51:42.355Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T21:51:43.363Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T21:51:54.392Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T21:51:54.392Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T21:51:56.274Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T21:52:08.388Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T21:52:08.388Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T21:52:09.397Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T21:52:21.906Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T21:52:21.906Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T21:52:22.914Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T21:52:35.136Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T21:52:35.136Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T21:52:36.148Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T21:52:50.170Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T21:52:50.171Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T21:52:51.177Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T21:53:00.615Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T21:53:00.615Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T21:54:26.303Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T21:54:37.719Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T21:54:37.719Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T21:54:38.734Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T21:54:50.689Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T21:54:50.690Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T21:54:51.697Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T21:55:04.377Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T21:55:04.377Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T21:55:05.386Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T21:55:16.928Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T21:55:16.928Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T21:55:17.942Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T21:55:32.925Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T21:55:32.926Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T21:55:33.936Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T21:55:47.342Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T21:55:47.342Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T21:55:48.356Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T21:55:59.851Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T21:55:59.851Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T21:56:36.725Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T21:56:48.616Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T21:56:48.616Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:07:56.448Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:08:08.836Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:08:08.837Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:08:09.847Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:08:22.742Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:08:22.743Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:10:24.484Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:10:33.980Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:10:33.980Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:11:29.989Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:11:40.799Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:11:40.800Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:14:25.028Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:14:34.955Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:14:34.956Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:14:35.965Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:14:47.374Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:14:47.374Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:14:48.388Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:15:00.416Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:15:00.417Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:15:02.692Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:15:12.568Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:15:12.568Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:15:13.576Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:15:28.229Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:15:28.229Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:17:43.689Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:17:54.417Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:17:54.418Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:17:55.428Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:18:07.594Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:18:07.594Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:18:08.606Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:18:20.089Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:18:20.089Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:18:21.103Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:18:34.692Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:18:34.693Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:18:35.704Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:18:46.461Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:18:46.461Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:21:37.043Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:21:46.604Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:21:46.604Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:21:47.611Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:21:59.867Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:21:59.868Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:40:58.023Z] : 
+change of index.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:41:13.907Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:41:13.907Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[debug] [2024-10-24T22:41:21.773Z] : > refreshing access token <
+[debug] [2024-10-24T22:41:21.775Z] : >>>> HTTP REQUEST : POST https://accounts.zoho.com/oauth/v2/token 
+<request body omitted>
+
+[debug] [2024-10-24T22:41:22.807Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Thu, 24 Oct 2024 22:41:21 GMT","content-type":"application/json;charset=UTF-8","content-length":"1980","connection":"keep-alive","set-cookie":["zalb_b266a5bf57=a7f15cb1555106de5ac96d088b72e7c8; Path=/; Secure; HttpOnly","iamcsr=53136e1e-e1cc-445a-8959-3a9b81a0e878;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=53136e1e-e1cc-445a-8959-3a9b81a0e878;path=/;SameSite=Strict;Secure;priority=high"],"cache-control":"no-store","x-content-type-options":"nosniff","pragma":"no-cache","x-frame-options":"SAMEORIGIN","vary":"accept-encoding","content-language":"en-US","strict-transport-security":"max-age=63072000"}
+
+[info] [2024-10-24T22:44:04.428Z] : 
+change of src\middleware\sessionInfo.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:44:16.271Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:44:16.272Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:44:17.274Z] : 
+change of src\middleware\sessionInfo.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:44:30.534Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:44:30.534Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:44:31.549Z] : 
+change of src\middleware\sessionInfo.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:44:41.770Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:44:41.770Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:55:14.031Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:55:24.813Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:55:24.814Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:55:25.815Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:55:35.881Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:55:35.881Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:55:36.896Z] : 
+change of src\controllers\userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:55:47.422Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:55:47.423Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:57:35.818Z] : 
+change of src\middleware\sessionInfo.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:57:46.226Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:57:46.227Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:57:47.239Z] : 
+change of src\middleware\sessionInfo.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:57:59.626Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:57:59.626Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T22:58:00.636Z] : 
+change of src\middleware\sessionInfo.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T22:58:11.213Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T22:58:11.213Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-10-24T23:28:01.443Z] : 
+change of src\middleware\sessionInfo.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-10-24T23:28:12.881Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-10-24T23:28:12.881Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/

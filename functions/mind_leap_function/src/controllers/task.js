@@ -1,5 +1,29 @@
 const  {  validateTask , validatePartialTask } = require('../schemas/task')
 const { TaskModel } = require('../models/task' )
+const  multer = require( 'multer');
+const {  extname, join }  = require('path');
+
+
+const CURRENT_DIR = __dirname;
+const UPLOAD_DIR =  join(CURRENT_DIR, '../files')
+const MIMETYPES = ['image/jpeg', 'image/png'];
+
+const multerUpload = multer({
+    storage: multer.diskStorage({
+        destination: UPLOAD_DIR,
+        filename: (req, file, cb) => {
+            const fileExtension = extname(file.originalname);
+            const fileName = file.originalname.split(fileExtension)[0];
+
+            cb(null, `${fileName}-${Date.now()}${fileExtension}`);
+        },
+    }),
+    
+    limits: {
+        fieldSize: 10000000,
+    },
+});
+
 
 class taskController {
 
@@ -97,6 +121,30 @@ class taskController {
         }
         
     }
+
+
+    static async upload(req, res) {
+        multerUpload.single('file')(req, res, function (err) {
+            if (err instanceof multer.MulterError) {
+                // Error de Multer (p. ej., límite de archivo excedido)
+                return res.status(400).json({ error: err.message });
+            } else if (err) {
+                // Otro tipo de error
+                return res.status(400).json({ error: err.message });
+            }
+    
+            // Si no hay errores y el archivo fue subido exitosamente
+            if (!req.file) {
+                return res.status(400).json({ error: 'No se ha subido ningún archivo' });
+            }
+    
+            console.log(req.file); // Información del archivo subido
+    
+            const imageUrl = `${req.protocol}://${req.get('host')}/files/${req.file.filename}`;
+            res.status(201).json({ message: 'Archivo subido correctamente', imageUrl });
+        });
+    }
+    
 
 
     
