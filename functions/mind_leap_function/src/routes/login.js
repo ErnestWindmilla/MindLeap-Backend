@@ -1,30 +1,36 @@
 const express = require("express");
 const loginRouter = express.Router();
 const { UserRepository } = require( '../models/prueba-user')
-const jwt =  require( 'jsonwebtoken' )
 const { authController }= require( '../controllers/auth')
-const SECRET_JWT_KEY = "1324567987DASDSAJHDGHJSAGDJHSAGDHJGASHDGHJSAGDHJGASKDJHKSDHJKAHDKSHDJASJDHJSDJHWYDUIYWC IVABDUOIWUDWFYUDFAUDVJHVCIWOKLOXJHC DHUDGHU$^%%(*&@)(#)(*!@d)sdda ddc +"// Importa el archivo de rutas
+const { sessionInfo } = require('../middleware/sessionInfo' )
 
-// const timeLog = (req, res, next) => {
-//     console.log('Login')
-//     next()
-// }
+//check the session
+loginRouter.use( sessionInfo );
 
-// loginRouter.use(timeLog)
+// routes
 
-//Defining login page
-loginRouter.use( (req , res , next) => {
-    const token =  req.cookies.access_token
-    req.session = { user: null }
+loginRouter.post('/login',  authController.login )
 
-    try {
-        const data = jwt.verify( token , SECRET_JWT_KEY )
-        req.session.user = data
-    }catch {}
+loginRouter.post('/register', authController.register )
 
-    next()
+loginRouter.post('/logout', authController.logout )
+
+
+// Test End Points //
+
+// test the login
+loginRouter.get('/protected',(req,res) => {
+    //res.json({ "msg" : 'protected'})
+    const { user } = req.session
+   
+    if (!user ) return res.status(403).json({ "msg" : "No auth" , "user" : req.session})
+    res.json( user )
+    
+    
+   
 })
 
+// test the registers
 loginRouter.get('/all', async (req,res) => {
     //res.json({ "msg" : 'login'})
      const users =  await UserRepository.all ()
@@ -37,22 +43,6 @@ loginRouter.get('/all', async (req,res) => {
  
     
  })
-loginRouter.post('/login',  authController.login )
-
-loginRouter.post('/register', authController.register )
-
-loginRouter.post('/logout', authController.logout )
-
-loginRouter.get('/protected',(req,res) => {
-    //res.json({ "msg" : 'protected'})
-    const { user } = req.session
-   
-    if (!user ) return res.status(403).json({ "msg" : "No auth" , "user" : req.session})
-    res.json( user )
-    
-    
-   
-})
 
 //Defining register
 

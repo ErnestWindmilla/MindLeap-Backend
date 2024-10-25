@@ -1,7 +1,6 @@
 const  {  validateUser , validatePartialUser } = require('../schemas/user')
 const { UserRepository } = require('../models/prueba-user')
 const jwt =  require( 'jsonwebtoken' )
-const SECRET_JWT_KEY = "1324567987DASDSAJHDGHJSAGDJHSAGDHJGASHDGHJSAGDHJGASKDJHKSDHJKAHDKSHDJASJDHJSDJHWYDUIYWC IVABDUOIWUDWFYUDFAUDVJHVCIWOKLOXJHC DHUDGHU$^%%(*&@)(#)(*!@d)sdda ddc +"// Importa el archivo de rutas
 
 class authController {
 
@@ -27,13 +26,12 @@ class authController {
 
     static async  login  (req,res)  {
         const { username , password } = req.body
-        console.log ( { username , password })
          
         try {
          const user =  await UserRepository.login (  { username , password })
          const token  = jwt.sign ( 
              { id: user.id ,username: user.username},
-             SECRET_JWT_KEY ,
+                process.env.SECRET_JWT_KEY ,
              { expiresIn :"1h" }
          )
          
