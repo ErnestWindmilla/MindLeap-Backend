@@ -27,6 +27,8 @@ TaskRouter.get('/', taskController.getAll);
 // GET a task by its ID
 TaskRouter.get('/:id', taskController.getById);
 
+TaskRouter.get('/MadeBy/:idUP', taskController.madeBy);
+
 // POST (create) a new task
 TaskRouter.post('/', taskController.create);
 

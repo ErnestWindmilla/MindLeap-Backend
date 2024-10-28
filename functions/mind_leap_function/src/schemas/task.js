@@ -9,7 +9,9 @@ const taskSchema = z.object({
 
   image : z.string().url().optional(),
 
-  isPublic : z.boolean({ required_error: 'public is required' , invalid_type_error: 'public must be a boolean' })
+  isPublic : z.boolean({ required_error: 'public is required' , invalid_type_error: 'public must be a boolean' }),
+
+  idUP: z.string({ required_error: 'idUP is required' , invalid_type_error: 'idUP must be a string' })
 
 })
 

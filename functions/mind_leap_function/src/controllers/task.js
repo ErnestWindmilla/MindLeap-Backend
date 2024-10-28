@@ -56,6 +56,26 @@ class taskController {
        
     }
 
+    static async  madeBy  (req,res)  {
+        const { idUP } = req.params
+
+        if( !idUP)  res.status(400).send( " idUP require " )
+
+        try {
+            const tasks = await TaskModel.madeBy( idUP )
+    
+            res.status(200).json( tasks )
+            //const user = taskModel.getById( id )
+        }catch (error){
+            // Manejar el Error
+            res.status(400).send( error.message )
+        }  
+       
+       
+    }
+
+   
+
     // Create
     static async  create  (req,res)  {
        

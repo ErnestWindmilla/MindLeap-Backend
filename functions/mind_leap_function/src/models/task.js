@@ -20,9 +20,22 @@ class TaskModel {
     return task[0];
   }
 
+  static async madeBy( idUP ) {
+    
+    const connection = await Database.connect();
+    const [task] = await connection.query(`SELECT * FROM task WHERE idUP = ?;`, [ idUP ]);
+
+   
+
+    return task[0];
+  }
+
+
+  
+
   static async create( input ) {
     
-    
+    console.log( " Modelo ")
 
     const {
       title,
@@ -30,7 +43,15 @@ class TaskModel {
       isPublic,
       video,
       image,
+      idUP,
     } = input;
+
+    console.log( " datos Optenidos  ")
+
+
+    if ( !idUP )  idUP = "Admin"
+
+    console.log( " idUP ", idUP )
 
     const connection = await Database.connect();
     const [uuidResult] = await connection.query('SELECT UUID() as uuid;');
@@ -39,11 +60,12 @@ class TaskModel {
 
     try  {
       await connection.query(
-        `INSERT INTO task (idTask, title,descripcion, isPublic, video, image) 
-        VALUES (?, ?, ?, ?, ?, ?);`,
-        [uuid, title, descripcion, isPublic, video, image]
+        `INSERT INTO task (idTask, title,descripcion, isPublic, video, image , idUP) 
+        VALUES (?, ?, ?, ?, ?, ?, ?);`,
+        [uuid, title, descripcion, isPublic, video, image , idUP]
       );
     }catch (e){
+      console.log( " ERROR MODELO ", e)
       throw new Error('Error creating task');
     }
   
