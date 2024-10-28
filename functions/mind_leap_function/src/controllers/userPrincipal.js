@@ -102,7 +102,7 @@ class userPrincipalController {
              { expiresIn :"1h" }
          )
 
-         res.cookie('user',userPrincipal, {
+         res.cookie('user', userPrincipal.idUP , {
             httpOnly: false, // Cambiado a false para pruebas
             secure: false,   // Cambiado a false si no usas HTTPS
             //sameSite: 'None',
@@ -112,7 +112,7 @@ class userPrincipalController {
         
         
          res.cookie('access_token' , token ,{
-             httpOnly : true,
+             httpOnly : false,
              secure: false,
              //sameSite: 'strict' ,
              maxAge: 1000 * 60 * 60 // valida por una hora
@@ -141,7 +141,7 @@ class userPrincipalController {
 
         // Borrar la cookie 'access_token'
         res.clearCookie('access_token', {
-            httpOnly: true,   // Mismo valor que en la creación
+            httpOnly: false,   // Mismo valor que en la creación
             secure: false,    // Igual que en la creación
             path: '/'         // El path debe coincidir
         });
