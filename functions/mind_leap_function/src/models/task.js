@@ -23,11 +23,11 @@ class TaskModel {
   static async madeBy( idUP ) {
     
     const connection = await Database.connect();
-    const [task] = await connection.query(`SELECT * FROM task WHERE idUP = ?;`, [ idUP ]);
+    const [tasks] = await connection.query(`SELECT * FROM task WHERE idUP = ?;`, [ idUP ]);
 
    
 
-    return task[0];
+    return tasks;
   }
 
 
