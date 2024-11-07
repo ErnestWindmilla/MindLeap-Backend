@@ -17,7 +17,7 @@ if (!fs.existsSync(UPLOAD_DIR)) {
 
 // Serve static files (uploaded files) from the 'files' directory
 // This makes uploaded files accessible through URLs like '/files/filename.ext'
-TaskRouter.use('/files', express.static(UPLOAD_DIR));
+// TaskRouter.use('/files', express.static(UPLOAD_DIR));
 
 // Routes for Task operations
 
@@ -27,7 +27,13 @@ TaskRouter.get('/', taskController.getAll);
 // GET a task by its ID
 TaskRouter.get('/:id', taskController.getById);
 
+// GET task by Author
 TaskRouter.get('/MadeBy/:idUP', taskController.madeBy);
+
+TaskRouter.get('/byIsPublic/:isPublic' , taskController.getByIsPublic )
+TaskRouter.get('/MadeByAndPublic/:idUP' , taskController.madeByAndPublic )
+
+
 
 // POST (create) a new task
 TaskRouter.post('/', taskController.create);

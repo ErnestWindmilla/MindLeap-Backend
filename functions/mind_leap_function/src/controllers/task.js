@@ -30,7 +30,7 @@ class taskController {
     static async  getAll  (req,res)  {
 
         try {
-            const tasks =  await TaskModel.getAll ()
+            const tasks =  await TaskModel.getAll (req)
             res.json( tasks ).status( 200 )
         }catch (error){
             // Manejar el Error
@@ -44,7 +44,7 @@ class taskController {
         const { id } = req.params
         
         try {
-            const task = await TaskModel.getById( id )
+            const task = await TaskModel.getById( req, id )
     
             res.status(200).json( task )
             //const user = taskModel.getById( id )
@@ -62,7 +62,7 @@ class taskController {
         if( !idUP)  res.status(400).send( " idUP require " )
 
         try {
-            const tasks = await TaskModel.madeBy( idUP )
+            const tasks = await TaskModel.madeBy( req, idUP )
     
             res.status(200).json( tasks )
             //const user = taskModel.getById( id )
@@ -73,6 +73,47 @@ class taskController {
        
        
     }
+
+    static async  getByIsPublic  (req,res)  {
+        const { isPublic } = req.params
+
+        if( !isPublic)  res.status(400).send( " idUP require " )
+
+        try {
+            const tasks = await TaskModel.getByIsPublic( req, isPublic )
+    
+            res.status(200).json( tasks )
+            //const user = taskModel.getById( id )
+        }catch (error){
+            // Manejar el Error
+            res.status(400).send( error.message )
+        }  
+       
+       
+    }
+
+    static async  madeByAndPublic  (req,res)  {
+        const { idUP } = req.params
+
+        if( !idUP)  res.status(400).send( " idUP require " )
+
+        try {
+            const tasks = await TaskModel.madeByAndPublic( req, idUP )
+    
+            res.status(200).json( tasks )
+            //const user = taskModel.getById( id )
+        }catch (error){
+            // Manejar el Error
+            res.status(400).send( error.message )
+        }  
+       
+       
+    }
+
+
+
+    
+
 
    
 
@@ -87,7 +128,7 @@ class taskController {
         }       
         
         try {
-            const newTask = await  TaskModel.create( result.data)
+            const newTask = await  TaskModel.create( req, result.data)
             res.status(201).json(newTask)
         }catch (error){
             // Manejar el Error
@@ -100,7 +141,7 @@ class taskController {
         const { id } = req.params
 
         try {
-            const task = await TaskModel.delete( id )
+            const task = await TaskModel.delete( req, id )
         }catch (error){
             // Manejar el Error
             res.status(400).send( error.message )
@@ -120,7 +161,7 @@ class taskController {
         
         try {
             console.log( result.data);
-            const updatedTask = await  TaskModel.update(id , result.data )
+            const updatedTask = await  TaskModel.update(req, id , result.data )
             res.status(201).json(updatedTask)
         }catch (error){
             // Manejar el Error
@@ -132,7 +173,7 @@ class taskController {
     static async  getAllbyCreator  (req,res)  {
 
         try {
-            const tasks =  await TaskModel.getAllbyCreator ()
+            const tasks =  await TaskModel.getAllbyCreator (req)
             res.json( tasks ).status( 200 )
         }catch (error){
             // Manejar el Error

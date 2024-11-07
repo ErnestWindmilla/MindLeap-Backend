@@ -1,14 +1,13 @@
 const { asignTaskModel } = require('../models/asignTask' )
 const { validateAsignTask , validatePartialAsignTask } = require ( '../schemas/asignTask' )
 //const jwt =  require( 'jsonwebtoken' )
-
 class asignTaskController {
 
 
     static async  getAllbyUT  (req,res)  {
         const { idUT } = req.params
         try {
-            const asignTask =  await asignTaskModel.getAllbyUT( idUT)
+            const asignTask =  await asignTaskModel.getAllbyUT(req,  idUT)
             res.json( asignTask ).status( 200 )
         }catch (error){
             // Manejar el Error
@@ -22,7 +21,7 @@ class asignTaskController {
         const { idUT , idTask} = req.params
         
         try {
-            const asignTask = await asignTaskModel.getById( idTask , idUT )
+            const asignTask = await asignTaskModel.getById( req, idTask , idUT )
     
             res.status(200).json( asignTask )
             //const user = taskModel.getById( id )
@@ -35,7 +34,7 @@ class asignTaskController {
     }
 
     // Create
-    static async  create  (req,res)  {     
+    static async create (req,res)  {     
         
         //const { idUT , idTask , date , state } = req.body
         const result = validateAsignTask( req.body )
@@ -46,7 +45,7 @@ class asignTaskController {
         }       
         
         try {
-            const asignTask = await  asignTaskModel.create( result.data )
+            const asignTask = await  asignTaskModel.create( req, result.data )
             res.status(201).json(asignTask)
         }catch (error){
             // Manejar el Error
@@ -59,13 +58,14 @@ class asignTaskController {
         const { idUT , idTask} = req.params
 
         try {
-            const UT = await asignTaskModel.delete( idTask , idUT )
+            const UT = await asignTaskModel.delete(req, idTask , idUT )
+            res.status(200).send( true )
         }catch (error){
             // Manejar el Error
             res.status(400).send( error.message )
         }  
        
-        res.status(200).send( true )
+        
     }
 
     // update
@@ -80,7 +80,7 @@ class asignTaskController {
         
         try {
             console.log( result.data);
-            const updatedAT = await  asignTaskModel.update(  idTask , idUT , result.data)
+            const updatedAT = await  asignTaskModel.update(  req, idTask , idUT , result.data)
             res.status(201).json(updatedAT)
         }catch (error){
             // Manejar el Error

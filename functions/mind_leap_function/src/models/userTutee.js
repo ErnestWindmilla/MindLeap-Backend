@@ -2,69 +2,88 @@ const { Database } = require( "../middleware/conection")
 const bcrypt = require ('bcrypt')
 
 class userTuteeModel {
-  static async getAll() {
-    const connection = await Database.connect();
-    const [users] = await connection.query(`SELECT * FROM userTutee;`);
+  static async getAll(req) {
+    const connection = await Database.connect(req);
+    return await connection.executeZCQLQuery(`SELECT * FROM userTutee;`).then(queryResult => {
+      if(queryResult)
+        return queryResult
+      return null
+    }).catch(err => {
+      console.log('Error in get all userTutee', err)
+    });
 
-    if (users.length === 0) return null;
+    // if (users.length === 0) return null;
 
-    return users;
+    // return users;
   }
 
-  static async getById( id ) {
-    
-    const connection = await Database.connect();
-    const [user] = await connection.query(`SELECT * FROM userTutee WHERE idUT = ?;`, [ id ]);
+  static async getById( req, id ) {
+    const connection = await Database.connect(req);
+    return await connection.executeZCQLQuery(`SELECT * FROM userTutee WHERE idUT = ${id}`).then(queryResult => {
+      if(queryResult)
+        return queryResult
+      return null
+    }).catch(err => {
+      console.log('Error getting user by id', err)
+    })
 
-    return user[0];
   }
 
-  static async create( input ) {
+  static async create( req, input ) {
 
     const {
       username,
       email,
       password
     } = input;
+    console.log()
+    const connection = await Database.connect(req);
 
-    const connection = await Database.connect();
-    const [uuidResult] = await connection.query('SELECT UUID() as uuid;');
-    const [{ uuid }] = uuidResult;
-
+    let randomId;
+    if (req){
+      randomId = crypto.randomUUID();
+    }
     const hashedPassword = await bcrypt.hash( password , parseInt(process.env.SALT_ROUNDS )  )
     try  {
-      await connection.query(
+      await connection.executeZCQLQuery(
         `INSERT INTO userTutee (idUT, username , email, password) 
-        VALUES (?, ?, ?, ?);`,
-        [uuid, username, email, hashedPassword]
-      );
+        VALUES ('${randomId}', '${username}', '${email}', '${hashedPassword}');`
+      ).then(queryResult => {
+        console.log(queryResult)
+      }).catch(err => {
+        console.log('Error in insertion of userTutee', err)
+      });
     }catch (e){
       console.log(e)
-      //throw new Error('Error creating task');
     }
-  
-  
-
-    const [userTutee] = await connection.query(
+    return await connection.executeZCQLQuery(
       `SELECT idUT, username , email, password
-      FROM userTutee WHERE idUT = ?;`,
-      [uuid]
-    );
+      FROM userTutee WHERE idUT = '${randomId}';`
+    ).then(queryResult => {
+      if(queryResult)
+        return queryResult
+      return null
+    }).catch(err => {
+      console.log('Error at getting userTutee', err)
+    });
 
-    return userTutee[0];
+  
   }
 
-  static async delete( id ) {
-    const connection = await Database.connect();
-    const [result] = await connection.query(`DELETE FROM userTutee WHERE idUT = ?;`, [id]);
+  static async delete( req, id ) {
+    const connection = await Database.connect(req);
 
-    if (result.affectedRows === 0) return null;
+    return await connection.executeZCQLQuery(`DELETE FROM userTutee WHERE idUT = ${id}`).then(queryResult => {
+      return {message: 'User Tutee deleted'}
+    }).catch(err => {
+      console.log("Error in delete Tutee", err)
+    });
 
-    return { message: 'User Tutee deleted successfully' };
   }
+  
 
-  static async update(id, input) {
-    const connection = await Database.connect();
+  static async update(req, id, input) {
+    const connection = await Database.connect(req);
 
     if ( input.password ){
       input.password =  await bcrypt.hash( input.password , parseInt(process.env.SALT_ROUNDS )  )
@@ -73,6 +92,9 @@ class userTuteeModel {
     const keys = Object.keys(input);
     const values = Object.values(input);
     
+    const updateFields = Object.keys(input)
+    .map(key => `${key} = '${input[key]}'`)
+    .join(', ');
   
     // Verificar si hay campos para actualizar
     if (keys.length === 0) {
@@ -85,22 +107,32 @@ class userTuteeModel {
 
     try {
       const [result] = await connection.query(
-        `UPDATE userTutee SET ${setClause} WHERE idUT = ?;`,
-        [...values, id]
-      );
+        `UPDATE userTutee SET ${updateFields} WHERE idUT = ${id};`
+      ).then(queryResult => {
+        if(queryResult)
+          return queryResult
+        return null
+      }).catch(err => {
+        console.log('Error in updating userTutee', err)
+      });
 
       console.log( result );
   
-      if (result.affectedRows === 0) {
-        throw new Error('user tutee not found or no changes made');
-      }
+      // if (result.affectedRows === 0) {
+      //   throw new Error('user tutee not found or no changes made');
+      // }
   
       
-      const [updatedUT] = await connection.query(
+      const [updatedUT] = await connection.executeZCQLQuery(
         `SELECT idUT, username , email, password
-         FROM userTutee WHERE idUT = ?;`,
-        [id]
-      );
+         FROM userTutee WHERE idUT = ${id};`).then(queryResult => {
+          console.log(queryResult)
+          if(queryResult)
+            return queryResult
+          return null
+         }).catch(err => {
+          console.log('Error in getting userTutte', err)
+         });
   
       return updatedUT[0];
     } catch (e) {
@@ -109,28 +141,26 @@ class userTuteeModel {
     }
   }
 
-  static async login( username, password ) {
+  static async login( req, username, password ) {
 
-    const connection = await Database.connect();
-    const  [user]  = await connection.query(`SELECT * FROM userTutee WHERE username = ?;`, [ username ]);
-
-    const userTutee = user[0]
-
-    if (!userTutee )  throw new Error('User no Found');
-
-
-    const isValid = await bcrypt.compare( password , userTutee.password)
-    
-
-    if (!isValid )  throw new Error('Passoword Incorrect');
-
-    
-    return  userTutee
-
+    const connection = await Database.connect(req);
+    return await connection.executeZCQLQuery(`SELECT * FROM userTutee WHERE username = '${username}';`).then( queryResult => {
+      if(!queryResult) throw new  Error('User Not Found')
+      const isValid = bcrypt.compare(password, queryResult.password)
+      console.log(queryResult)
+      if(!isValid) throw new Error('Password Incorrect')
+      
+      return queryResult
+    }).catch(err => {
+      console.log('Error in select query', err)
+    });
 
   }
 
-  static async asignTask( idTask , idUT , date ) {
+
+
+  //NO HICE ASSIGNTASKSSSSS
+  static async asignTask( req, idTask , idUT , date ) {
     
     const connection = await Database.connect();
     const [task] = await connection.query(`SELECT * FROM task WHERE idTask = ?;`, [ idTask ]);
@@ -163,8 +193,8 @@ class userTuteeModel {
   }
 
 
-  // Edit Asigntask
-  static async doneTask( idTask , idUT , input ) {
+  // Edit Asigntask ME FALTQ ESTA MADRe
+  static async doneTask(req,  idTask , idUT , input ) {
     
     const connection = await Database.connect();
     const [asignTask] = await connection.query(`SELECT * FROM asingn_task WHERE idTask = ? and idUT = ?;`, [ idTask , idUT]);
@@ -214,7 +244,15 @@ class userTuteeModel {
     
   
   }
-  
+  static async getROWIDTuTee(req, idUT){
+      const connection = Database.connect(req)
+      return await connection.executeZCQLQuery(`Select ROWID from userTutee where idUT = ${idUT}`).then(response => {
+        console.log('EL OTRO ROWID', response[0].userTutee.ROWID)
+        return response[0].userTutee.ROWID
+      }).catch(err => {
+        console.log('Error in getROWIDTutee',err)
+      })
+  }
   
 }
 

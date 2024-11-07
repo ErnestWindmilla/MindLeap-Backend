@@ -13,6 +13,8 @@ assignMasterRouter.get('/:idUP', asignMasterController.getAllbyUP  )
 
 assignMasterRouter.get('/masters/:idUT', asignMasterController.getAllbyUT )
 
+assignMasterRouter.get('/tutees/:idUP', asignMasterController.getTutees)
+
 assignMasterRouter.post('/', asignMasterController.create )
 
 assignMasterRouter.delete('/:idUP/:idUT', asignMasterController.delete )

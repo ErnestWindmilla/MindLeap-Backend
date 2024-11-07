@@ -8,7 +8,7 @@ class userTuteeController {
     static async  getAll  (req,res)  {
 
         try {
-            const userTutee =  await userTuteeModel.getAll()
+            const userTutee =  await userTuteeModel.getAll(req)
             res.json( userTutee ).status( 200 )
         }catch (error){
             // Manejar el Error
@@ -22,7 +22,7 @@ class userTuteeController {
         const { id } = req.params
         
         try {
-            const userTutee = await userTuteeModel.getById( id )
+            const userTutee = await userTuteeModel.getById( req, id )
     
             res.status(200).json( userTutee )
             //const user = taskModel.getById( id )
@@ -45,7 +45,7 @@ class userTuteeController {
         }       
         
         try {
-            const newUT = await  userTuteeModel.create( result.data)
+            const newUT = await  userTuteeModel.create(req, result.data)
             res.status(201).json(newUT)
         }catch (error){
             // Manejar el Error
@@ -58,7 +58,7 @@ class userTuteeController {
         const { id } = req.params
 
         try {
-            const UT = await userTuteeModel.delete( id )
+            const UT = await userTuteeModel.delete(req, id )
         }catch (error){
             // Manejar el Error
             res.status(400).send( error.message )
@@ -78,7 +78,7 @@ class userTuteeController {
         
         try {
             console.log( result.data);
-            const updatedUT = await  userTuteeModel.update(id , result.data )
+            const updatedUT = await  userTuteeModel.update(req, id , result.data )
             res.status(201).json(updatedUT)
         }catch (error){
             // Manejar el Error
@@ -96,21 +96,36 @@ class userTuteeController {
 
         try {
        
-         const userTutee =  await userTuteeModel.login (  username , password )
+         const userTutee =  await userTuteeModel.login ( req, username , password )
 
          const token  = jwt.sign ( 
              { idUT: userTutee.idUP , username: userTutee.username},
                 process.env.SECRET_JWT_KEY ,
              { expiresIn :"1h" }
          )
-         
+
+         res.cookie('user', { 'idUT' : userTutee.idUT }  , {
+            httpOnly: false, // Cambiado a false para pruebas
+            secure: false,   // Cambiado a false si no usas HTTPS
+            //sameSite: 'None',
+            maxAge: 1000 * 60 * 60 // 1 hora
+        })
+        
+        
+        
          res.cookie('access_token' , token ,{
-             httpOnly : true,
+             httpOnly : false,
+             secure: false,
              //sameSite: 'strict' ,
              maxAge: 1000 * 60 * 60 // valida por una hora
      
-         } ).send ( {userTutee} )
+         } )
+
+         console.log("Cookies actuales despues del login: ", req.cookies);
+
+         res.send ( {userTutee} )
          
+      
         }catch (error){
          // Manejar el Error
          res.status(400).send( error.message )
@@ -128,7 +143,7 @@ class userTuteeController {
        
         
         try {
-            const asignTask = await  userTuteeModel.asignTask( idTask , idUT , date )
+            const asignTask = await  userTuteeModel.asignTask(req, idTask , idUT , date )
             res.status(201).json(asignTask)
         }catch (error){
             // Manejar el Error
