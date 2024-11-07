@@ -7,7 +7,7 @@ class userPrincipalController {
     static async  getAll  (req,res)  {
 
         try {
-            const userTutee =  await userPrincipalModel.getAll()
+            const userTutee =  await userPrincipalModel.getAll(req)
             res.json( userTutee ).status( 200 )
         }catch (error){
             // Manejar el Error
@@ -21,7 +21,7 @@ class userPrincipalController {
         const { id } = req.params
         
         try {
-            const userTutee = await userPrincipalModel.getById( id )
+            const userTutee = await userPrincipalModel.getById(req, id )
     
             res.status(200).json( userTutee )
             //const user = taskModel.getById( id )
@@ -37,14 +37,15 @@ class userPrincipalController {
     static async  create  (req,res)  {
        
         const result = validateUser( req.body )
-        
+        console.log(result.data)
         if (!result.success) {
             // 422 Unprocessable Entity
               return res.status(422).json({ error: JSON.parse(result.error.message) })
         }       
         
         try {
-            const newUP = await  userPrincipalModel.create( result.data)
+            const newUP = await  userPrincipalModel.create(req,  result.data)
+            console.log(newUP)
             res.status(201).json(newUP)
         }catch (error){
             // Manejar el Error
@@ -57,7 +58,7 @@ class userPrincipalController {
         const { id } = req.params
 
         try {
-            const UP = await userPrincipalModel.delete( id )
+            const UP = await userPrincipalModel.delete( req, id )
         }catch (error){
             // Manejar el Error
             res.status(400).send( error.message )
@@ -77,7 +78,7 @@ class userPrincipalController {
         
         try {
             console.log( result.data);
-            const updatedUT = await  userPrincipalModel.update(id , result.data )
+            const updatedUT = await  userPrincipalModel.update(req, id , result.data )
             res.status(201).json(updatedUT)
         }catch (error){
             // Manejar el Error
@@ -93,8 +94,9 @@ class userPrincipalController {
         if ( user ) return res.status(400).json({ "msg" : "Already Login , logout" , "user" : req.session})
 
         try {
-       
-         const userPrincipal =  await userPrincipalModel.login (  username , password )
+            console.log('user', user)
+            console.log('Username', username, '\npassowrd', password)
+         const userPrincipal =  await userPrincipalModel.login (  req, username , password )
 
          const token  = jwt.sign ( 
              { idUP: userPrincipal.idUP , username: userPrincipal.username},
@@ -102,7 +104,7 @@ class userPrincipalController {
              { expiresIn :"1h" }
          )
 
-         res.cookie('user', userPrincipal.idUP , {
+         res.cookie('user', { 'idUP' : userPrincipal.idUP }  , {
             httpOnly: false, // Cambiado a false para pruebas
             secure: false,   // Cambiado a false si no usas HTTPS
             //sameSite: 'None',

@@ -10,7 +10,7 @@ class asignMasterController {
     static async  getAll  (req,res)  {
 
         try {
-            const assignMaster =  await asignMasterModel.getAll()
+            const assignMaster =  await asignMasterModel.getAll(req)
             res.json( assignMaster ).status( 200 )
         }catch (error){
             // Manejar el Error
@@ -23,7 +23,7 @@ class asignMasterController {
     static async  getAllbyUP  (req,res)  {
         const { idUP } = req.params
         try {
-            const assignMaster =  await asignMasterModel.getAllbyUP( idUP)
+            const assignMaster =  await asignMasterModel.getAllbyUP( req, idUP)
             res.json( assignMaster ).status( 200 )
         }catch (error){
             // Manejar el Error
@@ -78,6 +78,17 @@ class asignMasterController {
         }  
        
         res.status(200).send( true )
+    }
+
+    static async getTutees (req, res) {
+        const {idUP} = req.params
+
+        try {
+            const am = await asignMasterModel.getTutees(idUP)
+            res.status(201).json(am)
+        }catch(error){
+            res.status(400).send(error.message)
+        }
     }
 
 
