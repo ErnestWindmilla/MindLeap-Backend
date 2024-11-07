@@ -71,6 +71,7 @@ class userPrincipalController {
     static async  update  (req,res)  {
         const result = validatePartialUser( req.body )
         const { id } = req.params
+        console.log('result desde controlador', req.body)
         if (!result.success) {
             // 422 Unprocessable Entity
               return res.status(422).json({ error: JSON.parse(result.error.message) })

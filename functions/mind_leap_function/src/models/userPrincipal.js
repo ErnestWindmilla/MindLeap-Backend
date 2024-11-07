@@ -90,7 +90,7 @@ class userPrincipalModel {
       if ( input.password ){
         input.password =  await bcrypt.hash( input.password , parseInt(process.env.SALT_ROUNDS )  )
       }
-  
+      console.log('INPUT', input.file)
       const keys = Object.keys(input);
       const values = Object.values(input);
       
