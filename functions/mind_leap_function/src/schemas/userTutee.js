@@ -14,7 +14,7 @@ const userTuteeSchema = z.object({
   .regex(/[\W_]/, "La contraseña debe contener al menos un carácter especial"),
 
   //idUP: z.string( { invalid_type_error: 'User Principal must be a string', required_error: 'User Principal id is required'} )
-
+  profileImg:  z.string( {   invalid_type_error: 'profile must be a string'  }).optional(),
              
   
 })

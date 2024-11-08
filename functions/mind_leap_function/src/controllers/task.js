@@ -1,28 +1,15 @@
-const  {  validateTask , validatePartialTask } = require('../schemas/task')
+// Model
 const { TaskModel } = require('../models/task' )
-const  multer = require( 'multer');
-const {  extname, join }  = require('path');
+
+// Validation
+const  {  validateTask , validatePartialTask } = require('../schemas/task')
 
 
-const CURRENT_DIR = __dirname;
-const UPLOAD_DIR =  join(CURRENT_DIR, '../files')
-const MIMETYPES = ['image/jpeg', 'image/png'];
+// Files 
+const {upload , UPLOAD_DIR} = require('../middleware/upload'); 
+const fs = require('fs');
+const path = require('path');
 
-const multerUpload = multer({
-    storage: multer.diskStorage({
-        destination: UPLOAD_DIR,
-        filename: (req, file, cb) => {
-            const fileExtension = extname(file.originalname);
-            const fileName = file.originalname.split(fileExtension)[0];
-
-            cb(null, `${fileName}-${Date.now()}${fileExtension}`);
-        },
-    }),
-    
-    limits: {
-        fieldSize: 10000000,
-    },
-});
 
 
 class taskController {
@@ -80,6 +67,7 @@ class taskController {
         if( !isPublic)  res.status(400).send( " idUP require " )
 
         try {
+            console.log('isPublic', isPublic)
             const tasks = await TaskModel.getByIsPublic( req, isPublic )
     
             res.status(200).json( tasks )
@@ -109,31 +97,47 @@ class taskController {
        
        
     }
-
-
-
-    
-
-
-   
-
     // Create
     static async  create  (req,res)  {
        
-        const result = validateTask( req.body )
-        
-        if (!result.success) {
-            // 422 Unprocessable Entity
-              return res.status(422).json({ error: JSON.parse(result.error.message) })
-        }       
-        
-        try {
-            const newTask = await  TaskModel.create( req, result.data)
-            res.status(201).json(newTask)
-        }catch (error){
-            // Manejar el Error
-            res.status(400).send( error )
-        } 
+        upload.single('file')(req, res, async function (err) {
+            if (err) {
+                return res.status(400).json({ error: 'Error al subir el archivo.' });
+            }
+            
+            if (typeof req.body.isPublic == 'string'  ){
+                const str = req.body.isPublic
+                req.body.isPublic =  str.toLowerCase() === 'true'
+            }
+            const result = validateTask(req.body);
+
+            if (!result.success) {
+                return res.status(422).json({ error: JSON.parse(result.error.message) });
+            }
+
+            try {
+                // Verifica si se subió un archivo
+                const fileName = req.file ? req.file.filename : null;
+
+                // Agrega el nombre del archivo al objeto de datos si existe
+                const taskData = {
+                    ...result.data,
+                    ...(fileName ? { archivo: fileName } : {})
+                };
+
+               
+                const newTask = await TaskModel.create(req, taskData);
+                res.status(201).json(newTask);
+            } catch (error) {
+                
+                if (req.file) {
+                    fs.unlink(path.join(UPLOAD_DIR, req.file.filename), (err) => {
+                        if (err) console.error("Error al eliminar el archivo:", err);
+                    });
+                }
+                res.status(400).json({ error: error.message });
+            }
+        });
     }
 
     // Delete
@@ -185,21 +189,11 @@ class taskController {
 
 
     static async upload(req, res) {
-        multerUpload.single('file')(req, res, function (err) {
-            if (err instanceof multer.MulterError) {
-                // Error de Multer (p. ej., límite de archivo excedido)
-                return res.status(400).json({ error: err.message });
-            } else if (err) {
-                // Otro tipo de error
-                return res.status(400).json({ error: err.message });
+        upload.single('file')(req, res, function (err) {
+            if (err) {
+                console.log(err.message)
+                return res.status(400).json({ error: 'Error al subir el archivo.' });
             }
-    
-            // Si no hay errores y el archivo fue subido exitosamente
-            if (!req.file) {
-                return res.status(400).json({ error: 'No se ha subido ningún archivo' });
-            }
-    
-            console.log(req.file); // Información del archivo subido
     
             const imageUrl = `${req.protocol}://${req.get('host')}/files/${req.file.filename}`;
             res.status(201).json({ message: 'Archivo subido correctamente', imageUrl });

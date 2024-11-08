@@ -247,7 +247,7 @@ class userTuteeModel {
   static async getROWIDTuTee(req, idUT){
       const connection = Database.connect(req)
       return await connection.executeZCQLQuery(`Select ROWID from userTutee where idUT = ${idUT}`).then(response => {
-        console.log('EL OTRO ROWID', response[0].userTutee.ROWID)
+        // console.log('EL OTRO ROWID', response[0].userTutee.ROWID)
         return response[0].userTutee.ROWID
       }).catch(err => {
         console.log('Error in getROWIDTutee',err)

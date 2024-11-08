@@ -90,7 +90,7 @@ class userPrincipalModel {
       if ( input.password ){
         input.password =  await bcrypt.hash( input.password , parseInt(process.env.SALT_ROUNDS )  )
       }
-      console.log('INPUT', input.file)
+  
       const keys = Object.keys(input);
       const values = Object.values(input);
       
@@ -159,7 +159,7 @@ class userPrincipalModel {
     return await connection.executeZCQLQuery(`select ROWID from userPrincipal where idUP like '${idUP}'`).then(response => { 
     
       let id = response[0].userPrincipal.ROWID
-      console.log('DATOS DE GETROWIDUP', id)
+      // console.log('DATOS DE GETROWIDUP', id)
       return id
     
     }).catch(err => { console.log('Error in getROWID', err)})

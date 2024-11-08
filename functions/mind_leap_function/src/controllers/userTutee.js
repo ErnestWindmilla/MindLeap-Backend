@@ -2,6 +2,13 @@ const  {  validateUserTutee , validatePartialUserTutee } = require('../schemas/u
 const { userTuteeModel } = require('../models/userTutee' )
 const jwt =  require( 'jsonwebtoken' )
 
+
+// Files 
+const {upload , UPLOAD_DIR} = require('../middleware/upload'); 
+const fs = require('fs');
+const path = require('path');
+
+
 class userTuteeController {
 
 
@@ -34,6 +41,22 @@ class userTuteeController {
        
     }
 
+    static async  getByUsername  (req,res)  {
+        const { username } = req.params
+        
+        try {
+            const userTutee = await userTuteeModel.getByUsername(req,  username )
+    
+            res.status(200).json( userTutee )
+            //const user = taskModel.getById( id )
+        }catch (error){
+            // Manejar el Error
+            res.status(400).send( error.message )
+        }  
+       
+       
+    }
+
     // Create
     static async  create  (req,res)  {
        
@@ -45,7 +68,7 @@ class userTuteeController {
         }       
         
         try {
-            const newUT = await  userTuteeModel.create(req, result.data)
+            const newUT = await  userTuteeModel.create( req, result.data)
             res.status(201).json(newUT)
         }catch (error){
             // Manejar el Error
@@ -58,7 +81,7 @@ class userTuteeController {
         const { id } = req.params
 
         try {
-            const UT = await userTuteeModel.delete(req, id )
+            const UT = await userTuteeModel.delete( req, id )
         }catch (error){
             // Manejar el Error
             res.status(400).send( error.message )
@@ -69,23 +92,65 @@ class userTuteeController {
 
     // update
     static async  update  (req,res)  {
-        const result = validatePartialUserTutee( req.body )
-        const { id } = req.params
-        if (!result.success) {
-            // 422 Unprocessable Entity
-              return res.status(422).json({ error: JSON.parse(result.error.message) })
-        }       
-        
-        try {
-            console.log( result.data);
-            const updatedUT = await  userTuteeModel.update(req, id , result.data )
-            res.status(201).json(updatedUT)
-        }catch (error){
-            // Manejar el Error
-            res.status(400).send( error )
-        } 
-    }
+        console.log('update Controller tutee')
+        upload.single('file')(req, res, async function (err) {
+            console.log('update Function')
+            
+            if (err) {
+                return res.status(400).json({ error: 'Error al subir el archivo.' });
+            }
+            
+            const result = validatePartialUserTutee( req.body )
+            const { id } = req.params
 
+
+            if (!result.success) {
+                // 422 Unprocessable Entity
+                  return res.status(422).json({ error: JSON.parse(result.error.message) })
+            }       
+            
+
+            try {
+
+                const currentUser = await  userTuteeModel.getById(req, id);
+                if (!currentUser) {
+                    return res.status(404).json({ error: 'Usuario no encontrado.' });
+                }
+
+
+                // Verifica si se subió un archivo
+                const fileName = req.file ? req.file.filename : null;
+
+                // Agrega el nombre del archivo al objeto de datos si existe
+                const userUpdate = {
+                    ...result.data,
+                    ...(fileName ? { profileImg: fileName } : {})
+                };
+
+                const updatedUT = await  userTuteeModel.update(req, id , userUpdate )
+
+                if (currentUser.profileImg && req.file) {
+                    const previousImagePath = path.join(UPLOAD_DIR, currentUser.profileImg);
+                    fs.unlink(previousImagePath, (err) => {
+                        if (err) console.error("Error al eliminar la imagen anterior:", err);
+                    });
+                }
+
+
+                res.status(201).json(updatedUT)
+            } catch (error) {
+                
+                if (req.file) {
+                    fs.unlink(path.join(UPLOAD_DIR, req.file.filename), (err) => {
+                        if (err) console.error("Error al eliminar el archivo:", err);
+                    });
+                }
+                res.status(400).json({ error: error.message });
+            }
+        });
+
+
+    }
 
     //login
     static async  login  (req,res)  {
@@ -96,7 +161,7 @@ class userTuteeController {
 
         try {
        
-         const userTutee =  await userTuteeModel.login ( req, username , password )
+         const userTutee =  await userTuteeModel.login (req,  username , password )
 
          const token  = jwt.sign ( 
              { idUT: userTutee.idUP , username: userTutee.username},

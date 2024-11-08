@@ -1,158 +1,248 @@
 const { Database } = require( "../middleware/conection")
-const {userTuteeModel} = require("../models/userTutee")
-const {userPrincipalModel} = require("../models/userPrincipal")
-class asignMasterModel {
+const { userTuteeModel } = require( "../models/userTutee")
 
-  static async getAll(req) {
+class asignTaskModel {
+  static async getAllbyUT( req, idUT ) {
     const connection = await Database.connect(req);
-    const [users] = await connection.executeZCQLQuery(`SELECT * FROM userPrincipal_Tutee`);
-    console.log(users)
-    if (users.length === 0) throw new Error(' Asigin Master no found');;
+    const rowIDUT = await connection.executeZCQLQuery(`Select ROWID from userTutee where idUT like '${idUT}';`).then(resultQuery => {
+      if(resultQuery)
+        return resultQuery[0].userTutee.ROWID
+    }).catch(err => {
+      console.log('Error in ROWID select', err)
+    })
 
-    return users;
+    const query= `SELECT taskInfo.title, taskInfo.descripcion, taskInfo.isPublic, taskInfo.video,
+    taskInfo.image, taskInfo.image, taskInfo.idUP FROM userTutee AS U
+    INNER JOIN assignTask as userTask on U.ROWID = userTask.idUT
+    INNER JOIN task as taskInfo on userTask.idTask = taskInfo.ROWID
+    WHERE U.ROWID = ${rowIDUT}`
+
+  return await connection.executeZCQLQuery(query).then(resultQuery => {
+    if(resultQuery)
+      return resultQuery
+    return null
+  }).catch(err => {
+    console.log('Error in select in SUPERQUERY', err)
+  })
   }
 
-  static async getAllbyUP( req, idUP ) {
+  static async getById(req,  idTask , idUT  ) {
     
     
     const connection = await Database.connect(req);
 
-    let query = `select ROWID from userPrincipal where idUP = '${idUP}'`
-    const rowIDUP = await connection.executeZCQLQuery(query).then(queryResult => {
+    const rowTask = await connection.executeZCQLQuery(`Select ROWID from task where idTask like '${idTask}'`).then(queryResult => {
       console.log(queryResult)
       if(queryResult)
-        return queryResult[0].userPrincipal.ROWID
+        return queryResult[0].task.ROWID
+      return null
+    }).catch(err => {
+      console.log('Error in rowTask query', err)
+    })
+    const rowUT= await connection.executeZCQLQuery(`Select ROWID from userTutee where idUT like '${idUT}'`).then(resultQuery => {
+      console.log(resultQuery)
+      if(resultQuery)
+        return resultQuery[0].userTutee.ROWID
+      return null
+    }).catch(err =>{console.log('Error in query UT',err)})
+    
+    const SUPERQUERY = `select userTutee.username, assignTask.state, assignTask.dates,
+task.image, task.descripcion, task.video from userTutee
+INNER JOIN assignTask  on userTutee.ROWID = assignTask.idUT
+INNER JOIN task on assignTask.idTask= task.ROWID
+where userTutee.ROWID = ${rowUT} and task.ROWID = ${rowTask}`
+    return await connection.executeZCQLQuery(SUPERQUERY).then(resultQuery => {
+     console.log(resultQuery)
+      if(resultQuery)
+        return resultQuery
+      return null
+    }).catch(err => {
+      console.log('Error in superquery', err)
+    })
+    
+
+  }
+
+  static async create( req, input ) {
+
+    const {
+      idUT,
+      idTask,
+      date,
+      state
+    } = input;
+    
+    
+    
+    const connection = await Database.connect(req);
+    const [task] = await connection.executeZCQLQuery(`SELECT * FROM task WHERE idTask = '${idTask}';`).then(resultQuery => {
+      if(resultQuery)
+        return resultQuery
+      return null
+    }).catch(err => {
+      console.log('Error in select query in task', err)
+    });
+    
+    const findTask =  task.task
+ 
+
+    // console.log(findTask);
+    if (!findTask )  throw new Error('task no found', findTask);
+
+    const [UT] = await connection.executeZCQLQuery(`SELECT * FROM userTutee WHERE idUT = '${idUT}';`).then(queryResult => {
+      if(queryResult)
+        return queryResult
+      return null
+    }).catch(err => {
+      console.log('Error in Select UT', err)
+    });
+
+
+    const findUT = UT.userTutee
+    if (!findUT)  throw new Error('user tutee no found');
+
+//QUERIES FOR ROWIDS 
+  const rowIDTask = await connection.executeZCQLQuery(`select ROWID from task where idTask like '${idTask}';`).then(queryResult =>{
+      //console.log(queryResult[0].task.idUP)
+      if((queryResult))
+        return queryResult[0].task.ROWID
+      return null
+      // return null
+    }).catch(err => {console.log('Error getting rowid Principal', err)});
+
+    console.log(rowIDTask)
+
+
+
+   const rowIDuserTutee = await connection.executeZCQLQuery(`select ROWID from userTutee where idUT like '${idUT}';`).then(queryResult =>{
+    //console.log(queryResult[0].userTutee.ROWID)  
+    if(queryResult)
+        return queryResult[0].userTutee.ROWID
+      return null
+    }).catch(err => {console.log('Error getting rowid Tutee', err)});
+    
+  //  console.log(rowIDuserTutee)
+    let query = `INSERT INTO assignTask (idUT, idTask , dates , state ) VALUES (${rowIDuserTutee}, ${rowIDTask}, '${date}', ${state});`
+    console.log(query)
+     return await connection.executeZCQLQuery(query).then(resultQuery => {
+          if(resultQuery)
+            return connection.executeZCQLQuery(`SELECT * FROM assignTask WHERE idTask = ${rowIDTask} AND idUT = ${rowIDuserTutee};`).then(resultQuery => {
+              if(resultQuery)
+                return resultQuery
+              return null
+            }).catch(err=> {
+              console.log('Error in select return value', err)
+            })
+        }).catch(err => {
+          console.log('Eror in insertion query', err)
+        });
+    
+   
+  }
+
+  static async delete( req, idTask , idUT ) {
+
+    const connection = await Database.connect(req);
+
+    
+    let query = `select ROWID from task where idTask = '${idTask}'`
+    const rowIDTask = await connection.executeZCQLQuery(query).then(queryResult => {
+      console.log(queryResult)
+      if(queryResult)
+        return queryResult[0].task.ROWID
+      return null
+    }).catch(err => {
+      console.log('Erorr in getting ROWIDTask', err)
+    })
+    
+    query = `select ROWID from userTutee where idUT = '${idUT}'`
+    const rowIDUT = await connection.executeZCQLQuery(query).then(queryResult => {
+      if(queryResult)
+        return queryResult[0].userTutee.ROWID
       return null
       
     }).catch(err => {
       console.log('Erorr in getting ROWIDTask', err)
     })
 
-    query = `SELECT idUP, idUT FROM userPrincipal_Tutee WHERE  idUP = ${rowIDUP};`
-    const [asignMaster] = await connection.executeZCQLQuery(query).then(queryResult => {
-     console.log(queryResult)
-      if(queryResult)
-        return queryResult
-    }).catch(err=> {
-      console.log('Error in select idUP fK', err)
-    });
-    
+    console.log(rowIDUT)
 
-    if(Array.isArray(asignMaster)) console.log('Si es un arreglo')
-
-
-    if ( asignMaster.length === 0 ) throw new Error(' Asigin Master no found');
-    const keys = Object.keys(asignMaster)
-    const valor = Object.values(asignMaster)
-
-    console.log(Object.values ( Object.values( valor ) ) )
-    console.log(keys)
-    //const idsUT = asignMaster.map(item => item.idUT);
-    //const idUTValues = asignMaster.map(entry => entry.userPrincipal_Tutee.idUT)
-    //console.log(idUTValues)
-    const [userTutees] = await connection.executeZCQLQuery(
-      `SELECT * FROM userTutee WHERE idUT IN (?);`,
-      [idsUT]
-    );
-
-    return userTutees;
-    //return asignMaster
+    query = `select * from assignTask where idTask = ${rowIDTask} and idUT = ${rowIDUT};`
+    return  connection.executeZCQLQuery(query).then(resultQuery => {
+      if(resultQuery)
+        return connection.executeZCQLQuery(`delete from assignTask where idTask = ${rowIDTask} and idUT = ${rowIDUT}`)
+      return null
+    }).catch(err => {
+      console.log('Error in select query before delete ', err)
+    })
 
   }
 
-  static async getAllbyUT(req,  idUT  ) {
-    const valor = userTuteeModel.getROWIDTuTee(req, idUT)
+  static async update( idTask , idUT , input) {
     const connection = await Database.connect(req);
-    const [assignMaster] = await connection.query(`SELECT idUP FROM userPrincipal_Tutee WHERE  idUT = ?;`, [idUT]);
+
+    console.log( input )
+    const keys = Object.keys(input);
+    const values = Object.values(input);
     
-   
-
-    if ( assignMaster.length === 0 ) throw new Error(' Asigin Master no found');
-
-    const idsUP = asignMaster.map(item => item.idUP);
-
-
-    const [userTutees] = await connection.query(
-      `SELECT * FROM userPrincipal WHERE idUP IN (?);`,
-      [idsUP]
-    );
-
-    return userTutees;
-
-  }
-
-  static async create(req, input ) {
-
-    const {
-      idUP,
-      idUT
-    } = input;
-    
-    const connection = await Database.connect();
-    const [master] = await connection.query(`SELECT * FROM userPrincipal WHERE idUP = ?;`, [ idUP ]);
-    
-    const findMaster =  master[0]
- 
-    
-    if (!findMaster )  throw new Error('master no found');
-
-    const [UT] = await connection.query(`SELECT * FROM userTutee WHERE idUT = ?;`, [ idUT ]);
-
-
-    const findUT = UT[0]
-    if (!findUT)  throw new Error('user tutee no found');
-
-    
-    try  {
-      await connection.query(
-        `INSERT INTO userPrincipal_Tutee (idUT, idUP  ) 
-        VALUES (?, ?);`,
-        [ idUT, idUP]
-      );
-    }catch (e){
-      console.log(e)
-      throw new Error('Error asigning master');
+  
+    // Verificar si hay campos para actualizar
+    if (keys.length === 0) {
+      throw new Error('No fields to update');
     }
+  
+    // Construir la consulta dinámicamente
+    const setClause = keys.map(key => `${key} = ?`).join(', ');
+    console.log( setClause )
+    console.log( values )
 
-    const [asign] = await connection.query(`SELECT * FROM userPrincipal_Tutee WHERE idUP = ? AND idUT = ?;`, [ idUP , idUT ]);
-    return asign[0];
-   
-  }
+    const updateFields = Object.keys(input)
+    .map(key => `${key} = '${input[key]}'`)
+    .join(', ');
 
-  static async delete( req, idUP , idUT ) {
-
-    const connection = await Database.connect();
-    const [asignMaster] = await connection.query(`SELECT * FROM userPrincipal_Tutee WHERE idUP = ? and idUT = ?;`, [ idUP , idUT]);
+    console.log(updateFields)
     
-    const findAsignMaster =  asignMaster[0]
-
-    if ( !findAsignMaster ) throw new Error(' Master Assign no found');
+    let query = `select ROWID from task where idTask = '${idTask}'`
+    const rowIDTask = await connection.executeZCQLQuery(query).then(queryResult => {
+      console.log(queryResult)
+      if(queryResult)
+        return queryResult[0].task.ROWID
+      return null
+    }).catch(err => {
+      console.log('Erorr in getting ROWIDTask', err)
+    })
     
-    const [result] = await connection.query(`DELETE FROM userPrincipal_Tutee WHERE idUP = ? and idUT = ?;`, [ idUP , idUT]);
+    query = `select ROWID from userTutee where idUT = '${idUT}'`
+    const rowIDUT = await connection.executeZCQLQuery(query).then(queryResult => {
+      if(queryResult)
+        return queryResult[0].userTutee.ROWID
+      return null
+      
+    }).catch(err => {
+      console.log('Erorr in getting ROWIDTask', err)
+    })
 
-    if (result.affectedRows === 0) return null;
-
-    return { message: ' Master Assign deleted successfully' };
+    query = `select * from assignTask where idTask=${rowIDTask} and idUT = ${rowIDUT}`
+    let updateQuery = `update assignTask set ${updateFields} where idTask=${rowIDTask} and idUT = ${rowIDUT}`
+    //UPDATE userPrincipal SET ${updateFields} WHERE idUP = '${id}
+    const result = await connection.executeZCQLQuery(query).then(queryResults => {
+      console.log(queryResults)
+      if(queryResults)
+        return connection.executeZCQLQuery(updateQuery).then(queryResultado => {
+          console.log(queryResultado)
+          if(queryResultado)
+            return queryResultado
+          return null
+        }).catch(err => {
+          console.log('Error in updateQuery', err)
+        })
+      return null
+    }).catch(err => {
+      console.log('Error in query select', err)
+    })
   }
 
-  static async getTutees(req, idUP){
-    const id = await userPrincipalModel.getROWIDuserPrincipal(req, idUP)
-
-    console.log('IDUP de GETTUTEES', id)
-    const connection = await Database.connect(req);
-    const [asignMaster] = await connection.query(
-      `Select ut.idUT, ut.username from userPrincipal_Tutee as up 
-      inner join userTutee as ut on up.idUT = ut.idUT
-      where up.idUP = '${id}'`).then(response => { console.log('respuesta esperada', response) 
-        return response})
-      console.log('POR FAOR',asignMaster)
-      const findAsignMaster = asignMaster[0]
-      console.log(asignMaster)
-      if(! findAsignMaster) throw new Error('NOT FOUND');
-      connection.destroy
-      return [...asignMaster]
-  }
   
 }
 
-module.exports = { asignMasterModel };
+module.exports = { asignTaskModel };

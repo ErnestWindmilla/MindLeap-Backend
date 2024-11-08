@@ -5,7 +5,7 @@ const mysql = require('mysql2/promise');
 
 
 const DEFAULT_CONFIG = {
-  host: '127.0.0.1',
+  host: 'localhost',
   user: 'root',
   port: 3306,
   database: 'MindLeap',

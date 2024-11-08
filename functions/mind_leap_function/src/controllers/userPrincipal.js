@@ -2,6 +2,13 @@ const  {  validateUser , validatePartialUser } = require('../schemas/user')
 const { userPrincipalModel } = require('../models/userPrincipal' )
 const jwt =  require( 'jsonwebtoken' )
 
+// Files 
+const {upload , UPLOAD_DIR} = require('../middleware/upload'); 
+const fs = require('fs');
+const path = require('path');
+
+
+
 class userPrincipalController {
 
     static async  getAll  (req,res)  {
@@ -37,15 +44,14 @@ class userPrincipalController {
     static async  create  (req,res)  {
        
         const result = validateUser( req.body )
-        console.log(result.data)
+        
         if (!result.success) {
             // 422 Unprocessable Entity
               return res.status(422).json({ error: JSON.parse(result.error.message) })
         }       
         
         try {
-            const newUP = await  userPrincipalModel.create(req,  result.data)
-            console.log(newUP)
+            const newUP = await  userPrincipalModel.create( req, result.data)
             res.status(201).json(newUP)
         }catch (error){
             // Manejar el Error
@@ -69,22 +75,65 @@ class userPrincipalController {
 
     // update
     static async  update  (req,res)  {
-        const result = validatePartialUser( req.body )
-        const { id } = req.params
-        console.log('result desde controlador', req.body)
-        if (!result.success) {
-            // 422 Unprocessable Entity
-              return res.status(422).json({ error: JSON.parse(result.error.message) })
-        }       
-        
-        try {
-            console.log( result.data);
-            const updatedUT = await  userPrincipalModel.update(req, id , result.data )
-            res.status(201).json(updatedUT)
-        }catch (error){
-            // Manejar el Error
-            res.status(400).send( error )
-        } 
+        console.log('update COntroller')
+        upload.single('file')(req, res, async function (err) {
+            console.log('update Function')
+            
+            if (err) {
+                return res.status(400).json({ error: 'Error al subir el archivo.' });
+            }
+            
+            const result = validatePartialUser( req.body )
+            const { id } = req.params
+
+
+            if (!result.success) {
+                // 422 Unprocessable Entity
+                  return res.status(422).json({ error: JSON.parse(result.error.message) })
+            }       
+            
+
+            try {
+
+                const currentUser = await userPrincipalModel.getById(req, id);
+                if (!currentUser) {
+                    return res.status(404).json({ error: 'Usuario no encontrado.' });
+                }
+
+
+                // Verifica si se subió un archivo
+                const fileName = req.file ? req.file.filename : null;
+
+                // Agrega el nombre del archivo al objeto de datos si existe
+                const userUpdate = {
+                    ...result.data,
+                    ...(fileName ? { profileImg: fileName } : {})
+                    
+                };
+
+                const updatedUT = await  userPrincipalModel.update(req, id , userUpdate )
+
+                if (currentUser.profileImg && req.file) {
+                    console.log('Borrando Anterior ...')
+                    const previousImagePath = path.join(UPLOAD_DIR, currentUser.profileImg);
+                    fs.unlink(previousImagePath, (err) => {
+                        if (err) console.error("Error al eliminar la imagen anterior:", err);
+                    });
+                }
+
+
+                res.status(201).json(updatedUT)
+            } catch (error) {
+                
+                if (req.file) {
+                    console.log( "Borrando " , req.file )
+                    fs.unlink(path.join(UPLOAD_DIR, req.file.filename), (err) => {
+                        if (err) console.error("Error al eliminar el archivo:", err);
+                    });
+                }
+                res.status(400).json({ error: error.message });
+            }
+        });
     }
 
 
@@ -95,9 +144,8 @@ class userPrincipalController {
         if ( user ) return res.status(400).json({ "msg" : "Already Login , logout" , "user" : req.session})
 
         try {
-            console.log('user', user)
-            console.log('Username', username, '\npassowrd', password)
-         const userPrincipal =  await userPrincipalModel.login (  req, username , password )
+       
+         const userPrincipal =  await userPrincipalModel.login (req, username , password )
 
          const token  = jwt.sign ( 
              { idUP: userPrincipal.idUP , username: userPrincipal.username},

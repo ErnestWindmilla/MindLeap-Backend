@@ -63,11 +63,29 @@ class TaskModel {
 
 
   static async getByIsPublic(req, isPublic ) {
-   
+   console.log("ENtra a modelo de getByisPublic")
+   let valor;
+    if(isPublic === 1) valor = 'true' 
+      else valor = 'false'
     const connection = await Database.connect(req);
-    const [tasks] = await connection.executeZCQLQuery(`SELECT * FROM task WHERE  isPublic = ${isPublic};`);
+    console.log(valor)
+    return await connection.executeZCQLQuery(`SELECT * FROM task WHERE  isPublic = ${valor};`).then(response =>{
+      const variable = response.data
+      console.log('RESPONSE DE ISBYPUBLIC', response.data)
+      // Reemplaza "Task" para que el JSON sea válido
+      const stringing = JSON.stringify(variable);
+      data = stringing.replace(/Task/g, '');
 
-    return tasks;
+// Convierte la cadena en un objeto JavaScript
+      const parsedData = JSON.parse(variable);
+      console.log('PARSED DATA', parsedData)
+// Extrae la información de cada "task" con .map
+      return tasksInfo = parsedData.map(item => item.task);
+
+      // return transformation = variable.map(({{ task }}) => ({ { ...task }}));
+    }).catch(err => {console.log('Error en connection a la base de datos de BYPUBLIC', err)});
+    console.log('Las tareas que se usa en getByIsPublic',[...tasks])
+    
   }
 
 

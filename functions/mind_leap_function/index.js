@@ -11,6 +11,7 @@ const cors = require('cors');
 
 const app = express()
 
+
 // Middleware para procesar los json
 app.use( express.json())
 app.use( cookieParser() )
@@ -19,6 +20,20 @@ app.use(cors({
 	credentials: true ,
 	exposedHeaders: ['set-cookie']               // Permitir credenciales (como cookies) en solicitudes cross-origin
   }));
+
+// Ruta de prueba para verificar el acceso al archivo
+app.get('/test-file', cors(), (req, res) => {
+    const filePath = join(UPLOAD_DIR, 'NKW-1729720862886.jpg');
+    console.log(`Intentando servir el archivo: ${filePath}`);
+    res.sendFile(filePath, (err) => {
+        if (err) {
+            console.error("Error al enviar el archivo:", err);
+            res.status(404).send('Archivo no encontrado');
+        }
+    });
+});
+
+
  
 
 app.use(router, (req, res) => {

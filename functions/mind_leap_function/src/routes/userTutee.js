@@ -11,6 +11,8 @@ UserTuteeRouter.get('/',  userTuteeController.getAll )
 
 UserTuteeRouter.get('/:id', userTuteeController.getById )
 
+UserTuteeRouter.get('/username/:username', userTuteeController.getByUsername )
+
 UserTuteeRouter.post('/', userTuteeController.create )
 
 UserTuteeRouter.delete('/:id', userTuteeController.delete )

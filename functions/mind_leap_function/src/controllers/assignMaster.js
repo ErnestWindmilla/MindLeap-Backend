@@ -23,7 +23,7 @@ class asignMasterController {
     static async  getAllbyUP  (req,res)  {
         const { idUP } = req.params
         try {
-            const assignMaster =  await asignMasterModel.getAllbyUP( req, idUP)
+            const assignMaster =  await asignMasterModel.getAllbyUP(req, idUP)
             res.json( assignMaster ).status( 200 )
         }catch (error){
             // Manejar el Error
@@ -36,7 +36,7 @@ class asignMasterController {
     static async  getAllbyUT  (req,res)  {
         const { idUT } = req.params
         try {
-            const assignMaster =  await asignMasterModel.getAllbyUT( idUT)
+            const assignMaster =  await asignMasterModel.getAllbyUT(req, idUT)
             res.json( assignMaster ).status( 200 )
         }catch (error){
             // Manejar el Error
@@ -58,7 +58,7 @@ class asignMasterController {
         }       
         
         try {
-            const assignMaster = await  asignMasterModel.create( result.data )
+            const assignMaster = await  asignMasterModel.create(req, result.data )
             res.status(201).json(assignMaster)
         }catch (error){
             // Manejar el Error
@@ -71,7 +71,7 @@ class asignMasterController {
         const { idUT , idUP} = req.params
 
         try {
-            const AM = await asignMasterModel.delete( idUP , idUT )
+            const AM = await asignMasterModel.delete( req, idUP , idUT )
         }catch (error){
             // Manejar el Error
             res.status(400).send( error.message )
@@ -84,7 +84,7 @@ class asignMasterController {
         const {idUP} = req.params
 
         try {
-            const am = await asignMasterModel.getTutees(idUP)
+            const am = await asignMasterModel.getTutees(req, idUP)
             res.status(201).json(am)
         }catch(error){
             res.status(400).send(error.message)
