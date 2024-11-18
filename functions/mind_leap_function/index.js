@@ -1,12 +1,9 @@
-require('dotenv').config();
+'use strict';
 
-const express = require('express');
-const catalyst = require('zcatalyst-sdk-node');
-const router = require('./src/routes/router'); 
-//const searchQuery  = require('./src/models/user')
-const cookieParser = require('cookie-parser')
-const cors = require('cors');
+module.exports = (req, res) => {
+	var url = req.url;
 
+<<<<<<< Updated upstream
 
 
 const app = express()
@@ -53,3 +50,17 @@ app.use(router, (req, res) => {
 })
 
 module.exports =app
+=======
+	switch (url) {
+		case '/':
+			res.writeHead(200, { 'Content-Type': 'text/html' });
+			res.write('<h1>Hello from index.js<h1>');
+			break;
+		default:
+			res.writeHead(404);
+			res.write('You might find the page you are looking for at "/" path');
+			break;
+	}
+	res.end();
+};
+>>>>>>> Stashed changes

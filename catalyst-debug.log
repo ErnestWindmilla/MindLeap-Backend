@@ -1,0 +1,230 @@
+[debug] [2024-11-08T17:39:26.070Z] : 
+[debug] [2024-11-08T17:39:26.071Z] : ----------------------------------------------------------------------
+[debug] [2024-11-08T17:39:26.071Z] : Command:      /usr/bin/node /usr/local/bin/catalyst init --force
+[debug] [2024-11-08T17:39:26.071Z] : CLI Version:  1.17.6
+[debug] [2024-11-08T17:39:26.071Z] : Platform:     linux
+[debug] [2024-11-08T17:39:26.072Z] : Node Version: v18.19.0
+[debug] [2024-11-08T17:39:26.072Z] : Time:         Fri Nov 08 2024 10:39:26 GMT-0700 (Mexican Pacific Standard Time)
+[debug] [2024-11-08T17:39:26.073Z] : ----------------------------------------------------------------------
+[debug] [2024-11-08T17:39:26.073Z] : 
+[debug] [2024-11-08T17:39:26.422Z] : > authorizing via signed-in user option
+[debug] [2024-11-08T17:39:26.422Z] : > command requires scopes: ["ZohoCatalyst.projects.ALL","ZohoCatalyst.projects.ALL","Stratus.sdkop.CREATE","Stratus.sdkop.READ","ZohoCatalyst.project.import.CREATE"]
+[debug] [2024-11-08T17:39:26.431Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075 
+
+[debug] [2024-11-08T17:39:27.169Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 17:39:27 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=c3d5ec374d3dc932973a3d50f55d8d00; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=a9259625-501e-4651-a84a-d66423b3a478;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=a9259625-501e-4651-a84a-d66423b3a478;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-11-08T17:39:27.172Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075/environment 
+
+[debug] [2024-11-08T17:39:28.072Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 17:39:27 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=bbdfb771565421abbe10f7a180903d28; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=78bd863b-6ac8-4d71-8806-cc21bafdf0c0;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=78bd863b-6ac8-4d71-8806-cc21bafdf0c0;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[info] [2024-11-08T17:39:28.078Z] : 
+      ___  
+      \  \     ____           _             _                 _   
+   ___ \  \   / ___|   __ _  | |_    __ _  | |  _   _   ___  | |_ 
+  /  / /  /  | |      / _` | | __|  / _` | | | | | | | / __| | __|
+ /  / /__/   | |___  | (_| | | |_  | (_| | | | | |_| | \__ \ | |_ 
+ \  \         \____|  \__,_|  \__|  \__,_| |_|  \__, | |___/  \__|
+  \__\                                          |___/       
+
+You're about to initialize a Catalyst project in this directory:
+
+  /home/windmilla/Documents/GitHub/MindLeap-Backend
+
+Before we get started, keep in mind:
+
+  * You are initializing in an existing Catalyst project directory
+
+[debug] [2024-11-08T17:39:28.085Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/orgs 
+
+[debug] [2024-11-08T17:39:30.078Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 17:39:29 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=bbdfb771565421abbe10f7a180903d28; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=d4a32700-29e4-43b5-813e-e391f69a2391;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=d4a32700-29e4-43b5-813e-e391f69a2391;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[info] [2024-11-08T17:39:30.091Z] : ℹ Setting up a new default project for this folder
+
+[debug] [2024-11-08T17:39:30.091Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project 
+
+[debug] [2024-11-08T17:40:08.245Z] : 
+[debug] [2024-11-08T17:40:08.246Z] : ----------------------------------------------------------------------
+[debug] [2024-11-08T17:40:08.246Z] : Command:      /usr/bin/node /usr/local/bin/catalyst init --force
+[debug] [2024-11-08T17:40:08.246Z] : CLI Version:  1.17.6
+[debug] [2024-11-08T17:40:08.247Z] : Platform:     linux
+[debug] [2024-11-08T17:40:08.247Z] : Node Version: v18.19.0
+[debug] [2024-11-08T17:40:08.247Z] : Time:         Fri Nov 08 2024 10:40:08 GMT-0700 (Mexican Pacific Standard Time)
+[debug] [2024-11-08T17:40:08.247Z] : ----------------------------------------------------------------------
+[debug] [2024-11-08T17:40:08.248Z] : 
+[debug] [2024-11-08T17:40:08.591Z] : > authorizing via signed-in user option
+[debug] [2024-11-08T17:40:08.591Z] : > command requires scopes: ["ZohoCatalyst.projects.ALL","ZohoCatalyst.projects.ALL","Stratus.sdkop.CREATE","Stratus.sdkop.READ","ZohoCatalyst.project.import.CREATE"]
+[debug] [2024-11-08T17:40:08.599Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075 
+
+[debug] [2024-11-08T17:40:09.558Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 17:40:09 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=b14009a6059feb83ee8aa1c715a015c5; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=05b1aa56-d38b-4270-b265-af9ff06f2298;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=05b1aa56-d38b-4270-b265-af9ff06f2298;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-11-08T17:40:09.561Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075/environment 
+
+[debug] [2024-11-08T17:40:10.252Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 17:40:10 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=c3d5ec374d3dc932973a3d50f55d8d00; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=92772663-181f-47c1-8a78-f26b6acc00cb;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=92772663-181f-47c1-8a78-f26b6acc00cb;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[info] [2024-11-08T17:40:10.258Z] : 
+      ___  
+      \  \     ____           _             _                 _   
+   ___ \  \   / ___|   __ _  | |_    __ _  | |  _   _   ___  | |_ 
+  /  / /  /  | |      / _` | | __|  / _` | | | | | | | / __| | __|
+ /  / /__/   | |___  | (_| | | |_  | (_| | | | | |_| | \__ \ | |_ 
+ \  \         \____|  \__,_|  \__|  \__,_| |_|  \__, | |___/  \__|
+  \__\                                          |___/       
+
+You're about to initialize a Catalyst project in this directory:
+
+  /home/windmilla/Documents/GitHub/MindLeap-Backend
+
+Before we get started, keep in mind:
+
+  * You are initializing in an existing Catalyst project directory
+
+[debug] [2024-11-08T17:40:10.265Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/orgs 
+
+[debug] [2024-11-08T17:40:11.150Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 17:40:10 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=c3d5ec374d3dc932973a3d50f55d8d00; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=0035c593-9c5a-4b24-9bc8-db36fca0fa46;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=0035c593-9c5a-4b24-9bc8-db36fca0fa46;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[info] [2024-11-08T17:40:11.155Z] : ℹ Setting up a new default project for this folder
+
+[debug] [2024-11-08T17:40:11.156Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project 
+
+[debug] [2024-11-08T17:40:11.807Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 17:40:11 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=c3d5ec374d3dc932973a3d50f55d8d00; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=26de4876-1533-4db6-88ac-964d44e28e94;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=26de4876-1533-4db6-88ac-964d44e28e94;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-11-08T17:40:17.205Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075/environment 
+
+[debug] [2024-11-08T17:42:22.378Z] : 
+[debug] [2024-11-08T17:42:22.378Z] : ----------------------------------------------------------------------
+[debug] [2024-11-08T17:42:22.379Z] : Command:      /usr/bin/node /usr/local/bin/catalyst init --force
+[debug] [2024-11-08T17:42:22.379Z] : CLI Version:  1.17.6
+[debug] [2024-11-08T17:42:22.379Z] : Platform:     linux
+[debug] [2024-11-08T17:42:22.380Z] : Node Version: v18.19.0
+[debug] [2024-11-08T17:42:22.380Z] : Time:         Fri Nov 08 2024 10:42:22 GMT-0700 (Mexican Pacific Standard Time)
+[debug] [2024-11-08T17:42:22.380Z] : ----------------------------------------------------------------------
+[debug] [2024-11-08T17:42:22.380Z] : 
+[debug] [2024-11-08T17:42:22.731Z] : > authorizing via signed-in user option
+[debug] [2024-11-08T17:42:22.731Z] : > command requires scopes: ["ZohoCatalyst.projects.ALL","ZohoCatalyst.projects.ALL","Stratus.sdkop.CREATE","Stratus.sdkop.READ","ZohoCatalyst.project.import.CREATE"]
+[debug] [2024-11-08T17:42:22.740Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075 
+
+[debug] [2024-11-08T17:42:23.491Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 17:42:23 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=4ead9897700827f973c0f7dbded7f673; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=e83d212c-4b36-474f-b766-b76c43a3e259;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=e83d212c-4b36-474f-b766-b76c43a3e259;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-11-08T17:42:23.494Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075/environment 
+
+[debug] [2024-11-08T17:42:24.185Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 17:42:24 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=bbdfb771565421abbe10f7a180903d28; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=a78aa487-82ec-448b-8ccc-637e25501662;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=a78aa487-82ec-448b-8ccc-637e25501662;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[info] [2024-11-08T17:42:24.188Z] : 
+      ___  
+      \  \     ____           _             _                 _   
+   ___ \  \   / ___|   __ _  | |_    __ _  | |  _   _   ___  | |_ 
+  /  / /  /  | |      / _` | | __|  / _` | | | | | | | / __| | __|
+ /  / /__/   | |___  | (_| | | |_  | (_| | | | | |_| | \__ \ | |_ 
+ \  \         \____|  \__,_|  \__|  \__,_| |_|  \__, | |___/  \__|
+  \__\                                          |___/       
+
+You're about to initialize a Catalyst project in this directory:
+
+  /home/windmilla/Documents/GitHub/MindLeap-Backend
+
+Before we get started, keep in mind:
+
+  * You are initializing in an existing Catalyst project directory
+
+[debug] [2024-11-08T17:42:24.192Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/orgs 
+
+[debug] [2024-11-08T17:42:25.250Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 17:42:25 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=b14009a6059feb83ee8aa1c715a015c5; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=4ff42dd2-aabb-468d-b43c-023b72e673eb;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=4ff42dd2-aabb-468d-b43c-023b72e673eb;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[info] [2024-11-08T17:42:25.261Z] : ℹ Setting up a new default project for this folder
+
+[debug] [2024-11-08T17:42:25.263Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project 
+
+[warn] [2024-11-08T17:44:35.931Z] : ⚠ ETIMEDOUT has occured while communicating remote server. Kindly be patient while the cli retries this request.
+[debug] [2024-11-08T17:44:35.931Z] : API Error while firing request : connect ETIMEDOUT 136.143.190.97:443
+
+[debug] [2024-11-08T17:44:35.931Z] : >>>> RETRYING
+
+[warn] [2024-11-08T17:46:46.997Z] : ⚠ ETIMEDOUT has occured while communicating remote server. Kindly be patient while the cli retries this request.
+[debug] [2024-11-08T17:46:46.997Z] : API Error while firing request : connect ETIMEDOUT 136.143.190.97:443
+
+[debug] [2024-11-08T17:46:46.997Z] : >>>> RETRYING
+
+[debug] [2024-11-08T17:46:47.749Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 17:46:47 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=c3d5ec374d3dc932973a3d50f55d8d00; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=3531dc8d-8864-4e33-a2f9-787fa35b2197;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=3531dc8d-8864-4e33-a2f9-787fa35b2197;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-11-08T19:09:00.042Z] : > refreshing access token <
+[debug] [2024-11-08T19:09:00.045Z] : >>>> HTTP REQUEST : POST https://accounts.zoho.com/oauth/v2/token 
+<request body omitted>
+
+[debug] [2024-11-08T19:09:00.983Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 19:09:00 GMT","content-type":"application/json;charset=UTF-8","content-length":"1980","connection":"close","set-cookie":["zalb_b266a5bf57=9f371135a524e2d1f51eb9f41fa26c60; Path=/; Secure; HttpOnly","iamcsr=cddcf51b-e3f8-4585-ab38-9f0d549c34cd;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=cddcf51b-e3f8-4585-ab38-9f0d549c34cd;path=/;SameSite=Strict;Secure;priority=high"],"cache-control":"no-store","x-content-type-options":"nosniff","pragma":"no-cache","x-frame-options":"SAMEORIGIN","vary":"accept-encoding","content-language":"en-US","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-11-08T19:09:01.007Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075/environment 
+
+[debug] [2024-11-08T19:09:01.672Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 19:09:01 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=4ead9897700827f973c0f7dbded7f673; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=1fb26fbe-c8f3-4142-bf0f-1d38f4822082;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=1fb26fbe-c8f3-4142-bf0f-1d38f4822082;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[info] [2024-11-08T19:09:01.691Z] : ℹ .catalystrc file has be successfully created with project details.
+[info] [2024-11-08T19:09:05.124Z] : 
+===> Functions Setup
+[info] [2024-11-08T19:09:05.141Z] : ℹ A directory functions will be created with a catalyst function pre-configured.
+
+[debug] [2024-11-08T19:09:05.141Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/get-details 
+Query params: {"feature_name":"integration_services"}
+
+[warn] [2024-11-08T19:11:15.798Z] : ⚠ ETIMEDOUT has occured while communicating remote server. Kindly be patient while the cli retries this request.
+[debug] [2024-11-08T19:11:15.798Z] : API Error while firing request : connect ETIMEDOUT 136.143.190.97:443
+
+[debug] [2024-11-08T19:11:15.798Z] : >>>> RETRYING
+
+[debug] [2024-11-08T19:11:16.906Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 19:11:16 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=4ead9897700827f973c0f7dbded7f673; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=7596bafb-07ba-414c-9174-a73358d954be;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=7596bafb-07ba-414c-9174-a73358d954be;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-11-08T19:11:29.686Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/get-details 
+Query params: {"feature_name":"runtime","function_type":"advancedio"}
+
+[debug] [2024-11-08T19:11:30.312Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 19:11:30 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=b14009a6059feb83ee8aa1c715a015c5; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=f6bd8a5f-643b-4d1a-a943-2d72f9744b59;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=f6bd8a5f-643b-4d1a-a943-2d72f9744b59;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[info] [2024-11-08T19:11:39.760Z] : This utility will ask series of questions with sensible defaults for creating package.json
+Feel free to modify them if needed.
+
+[info] [2024-11-08T19:11:39.761Z] : Use `npm install <pkg> --save` afterwards to install a package and 
+save it as a dependency in the package.json file.
+
+[info] [2024-11-08T19:11:48.455Z] : ℹ catalyst.json file has been successfully created with feature details.
+[info] [2024-11-08T19:11:48.456Z] : 
+[info] [2024-11-08T19:11:48.456Z] : ✔ Catalyst initialization complete!
+[error] [2024-11-08T19:11:48.458Z] : ✖ API Error: connect ETIMEDOUT 136.143.190.97:443
+[debug] [2024-11-08T19:11:48.458Z] : Error Stack: CatalystError: API Error: connect ETIMEDOUT 136.143.190.97:443
+    at API.<anonymous> (/usr/local/lib/node_modules/zcatalyst-cli/lib/internal/api.js:214:32)
+    at Generator.next (<anonymous>)
+    at fulfilled (/usr/local/lib/node_modules/zcatalyst-cli/lib/internal/api.js:28:58)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[debug] [2024-11-08T19:11:48.458Z] : Original Error: Error: connect ETIMEDOUT 136.143.190.97:443
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1549:16)
+[debug] [2024-11-08T19:11:48.458Z] : Error Status: 500
+[info] [2024-11-08T19:11:48.458Z] : Kindly contact Catalyst support [support@zohocatalyst.com] if you need any further assistance
+[error] [2024-11-08T19:11:48.458Z] : ✖ API Error: connect ETIMEDOUT 136.143.190.97:443
+[debug] [2024-11-08T19:11:48.458Z] : Error Stack: CatalystError: API Error: connect ETIMEDOUT 136.143.190.97:443
+    at API.<anonymous> (/usr/local/lib/node_modules/zcatalyst-cli/lib/internal/api.js:214:32)
+    at Generator.next (<anonymous>)
+    at fulfilled (/usr/local/lib/node_modules/zcatalyst-cli/lib/internal/api.js:28:58)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[debug] [2024-11-08T19:11:48.459Z] : Original Error: Error: connect ETIMEDOUT 136.143.190.97:443
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1549:16)
+[debug] [2024-11-08T19:11:48.459Z] : Error Status: 500
+[info] [2024-11-08T19:11:48.459Z] : Kindly contact Catalyst support [support@zohocatalyst.com] if you need any further assistance
+[debug] [2024-11-08T19:11:48.459Z] : EXEC ENDED with event: init, message: success
+[debug] [2024-11-08T19:11:48.459Z] : TOTAL DURATION OF COMMAND EXEC : 5365734
+[debug] [2024-11-08T19:11:48.464Z] : >>>> HTTP REQUEST : POST https://api.catalyst.zoho.com/baas/v1/cli/logs 
+<request body omitted>
+
+[debug] [2024-11-08T19:11:49.138Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 19:11:49 GMT","content-length":"0","connection":"close","set-cookie":["zalb_46512fd555=b14009a6059feb83ee8aa1c715a015c5; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=67343738-079c-4946-82e4-b7e42c5d8302;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=67343738-079c-4946-82e4-b7e42c5d8302;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
