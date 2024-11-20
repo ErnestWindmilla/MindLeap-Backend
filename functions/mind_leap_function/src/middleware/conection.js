@@ -17,8 +17,10 @@ class Database {
   static async connect(req) {
     if (catalyst) {
       const app = catalyst.initialize(req)
-      const zcql = app.zcql();
-      this.connection = zcql
+      // const zcql = app.zcql();
+      // const file = app.filestore();
+      
+      this.connection = app
     }
     return this.connection;
   }

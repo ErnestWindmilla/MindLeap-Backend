@@ -2,34 +2,43 @@ const { Database } = require( "../middleware/conection")
 const { userTuteeModel } = require( "../models/userTutee")
 
 class asignTaskModel {
+
+
   static async getAllbyUT( req, idUT ) {
-    const connection = await Database.connect(req);
-    const rowIDUT = await connection.executeZCQLQuery(`Select ROWID from userTutee where idUT like '${idUT}';`).then(resultQuery => {
-      if(resultQuery)
-        return resultQuery[0].userTutee.ROWID
-    }).catch(err => {
-      console.log('Error in ROWID select', err)
-    })
+
+    const app = await Database.connect(req)
+    const connection = app.zcql();
+    
+
+    
+    const rowIDUT = await userTuteeModel.getROWIDTuTee(req, idUT);
+    console.log('INFORMACION QUE ENTRA A ROWIDUT', rowIDUT)
 
     const query= `SELECT taskInfo.title, taskInfo.descripcion, taskInfo.isPublic, taskInfo.video,
-    taskInfo.image, taskInfo.image, taskInfo.idUP FROM userTutee AS U
+    taskInfo.image, taskInfo.idUP FROM userTutee AS U
     INNER JOIN assignTask as userTask on U.ROWID = userTask.idUT
     INNER JOIN task as taskInfo on userTask.idTask = taskInfo.ROWID
     WHERE U.ROWID = ${rowIDUT}`
-
+    
   return await connection.executeZCQLQuery(query).then(resultQuery => {
-    if(resultQuery)
-      return resultQuery
+    if(resultQuery){
+      const valor = resultQuery
+      console.log(resultQuery)
+      const cadenaFInal = valor.map(item => item.taskInfo)
+      
+      return cadenaFInal
+    }
     return null
   }).catch(err => {
     console.log('Error in select in SUPERQUERY', err)
   })
   }
 
-  static async getById(req,  idTask , idUT  ) {
+  static async getById(req,  idTask , idUT) {
+    const app = await Database.connect(req)
+    const connection = await app.zcql();
     
-    
-    const connection = await Database.connect(req);
+    // const connection = await Database.connect(req);
 
     const rowTask = await connection.executeZCQLQuery(`Select ROWID from task where idTask like '${idTask}'`).then(queryResult => {
       console.log(queryResult)
@@ -53,8 +62,11 @@ INNER JOIN task on assignTask.idTask= task.ROWID
 where userTutee.ROWID = ${rowUT} and task.ROWID = ${rowTask}`
     return await connection.executeZCQLQuery(SUPERQUERY).then(resultQuery => {
      console.log(resultQuery)
-      if(resultQuery)
-        return resultQuery
+      if(resultQuery){
+        const value = resultQuery
+        const mapeado = value.map(item => item.assignTask)
+        return mapeado
+      }
       return null
     }).catch(err => {
       console.log('Error in superquery', err)
@@ -74,7 +86,8 @@ where userTutee.ROWID = ${rowUT} and task.ROWID = ${rowTask}`
     
     
     
-    const connection = await Database.connect(req);
+    const app = await Database.connect(req)
+    const connection = await app.zcql();
     const [task] = await connection.executeZCQLQuery(`SELECT * FROM task WHERE idTask = '${idTask}';`).then(resultQuery => {
       if(resultQuery)
         return resultQuery
@@ -127,8 +140,12 @@ where userTutee.ROWID = ${rowUT} and task.ROWID = ${rowTask}`
      return await connection.executeZCQLQuery(query).then(resultQuery => {
           if(resultQuery)
             return connection.executeZCQLQuery(`SELECT * FROM assignTask WHERE idTask = ${rowIDTask} AND idUT = ${rowIDuserTutee};`).then(resultQuery => {
-              if(resultQuery)
-                return resultQuery
+              if(resultQuery){
+                const valor = resultQuery
+                const mapeado = valor.map(item => item.assignTask)
+                return mapeado
+              }
+                
               return null
             }).catch(err=> {
               console.log('Error in select return value', err)
@@ -142,7 +159,8 @@ where userTutee.ROWID = ${rowUT} and task.ROWID = ${rowTask}`
 
   static async delete( req, idTask , idUT ) {
 
-    const connection = await Database.connect(req);
+    const app = await Database.connect(req)
+    const connection = await app.zcql();
 
     
     let query = `select ROWID from task where idTask = '${idTask}'`
@@ -178,8 +196,9 @@ where userTutee.ROWID = ${rowUT} and task.ROWID = ${rowTask}`
 
   }
 
-  static async update( idTask , idUT , input) {
-    const connection = await Database.connect(req);
+  static async update( req, idTask , idUT , input) {
+    const app = await Database.connect(req)
+    const connection = await app.zcql();
 
     console.log( input )
     const keys = Object.keys(input);
@@ -224,14 +243,19 @@ where userTutee.ROWID = ${rowUT} and task.ROWID = ${rowTask}`
 
     query = `select * from assignTask where idTask=${rowIDTask} and idUT = ${rowIDUT}`
     let updateQuery = `update assignTask set ${updateFields} where idTask=${rowIDTask} and idUT = ${rowIDUT}`
+    console.log(updateQuery)
     //UPDATE userPrincipal SET ${updateFields} WHERE idUP = '${id}
-    const result = await connection.executeZCQLQuery(query).then(queryResults => {
+    return await connection.executeZCQLQuery(query).then(queryResults => {
       console.log(queryResults)
       if(queryResults)
         return connection.executeZCQLQuery(updateQuery).then(queryResultado => {
           console.log(queryResultado)
-          if(queryResultado)
-            return queryResultado
+          if(queryResultado){
+            const valor = queryResultado
+            const mapeado = valor.map(item => item.assignTask)
+            return mapeado
+
+          }
           return null
         }).catch(err => {
           console.log('Error in updateQuery', err)

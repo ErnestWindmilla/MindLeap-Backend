@@ -1,23 +1,23 @@
 const express = require("express");
 const assignMasterRouter = express.Router();
-const { asignMasterController } = require("../controllers/assignMaster");
+const { assignMasterController } = require("../controllers/assignMaster");
 
 
 
 // Routes
 
 
-assignMasterRouter.get('/', asignMasterController.getAll )
+assignMasterRouter.get('/', assignMasterController.getAll )
 
-assignMasterRouter.get('/:idUP', asignMasterController.getAllbyUP  )
+assignMasterRouter.get('/:idUP', assignMasterController.getAllbyUP  )
 
-assignMasterRouter.get('/masters/:idUT', asignMasterController.getAllbyUT )
+assignMasterRouter.get('/masters/:idUT', assignMasterController.getAllbyUT )
 
-assignMasterRouter.get('/tutees/:idUP', asignMasterController.getTutees)
+assignMasterRouter.get('/tutees/:idUP', assignMasterController.getTutees)
 
-assignMasterRouter.post('/', asignMasterController.create )
+assignMasterRouter.post('/', assignMasterController.create )
 
-assignMasterRouter.delete('/:idUP/:idUT', asignMasterController.delete )
+assignMasterRouter.delete('/:idUP/:idUT', assignMasterController.delete )
 
 
 

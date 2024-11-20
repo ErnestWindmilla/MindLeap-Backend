@@ -1,12 +1,20 @@
+const { query } = require("express");
 const { Database } = require( "../middleware/conection")
 const bcrypt = require ('bcrypt')
+var crypto = require('crypto');
 
 class userTuteeModel {
+
   static async getAll(req) {
-    const connection = await Database.connect(req);
+    const app = await Database.connect(req)
+    const connection = await app.zcql();
     return await connection.executeZCQLQuery(`SELECT * FROM userTutee;`).then(queryResult => {
-      if(queryResult)
-        return queryResult
+      if(queryResult){
+        const valor = queryResult
+        const mapeado = valor.map(item => item.userTutee)
+        return mapeado
+
+      }
       return null
     }).catch(err => {
       console.log('Error in get all userTutee', err)
@@ -18,10 +26,15 @@ class userTuteeModel {
   }
 
   static async getById( req, id ) {
-    const connection = await Database.connect(req);
-    return await connection.executeZCQLQuery(`SELECT * FROM userTutee WHERE idUT = ${id}`).then(queryResult => {
-      if(queryResult)
-        return queryResult
+    const value = id
+    const app = await Database.connect(req)
+    const connection = await app.zcql();
+    return await connection.executeZCQLQuery(`SELECT * FROM userTutee WHERE idUT = '${value}'`).then(queryResult => {
+      if(queryResult){
+        const valor = queryResult
+        const mapeado = valor.map(item => item.userTutee)
+        return mapeado
+      }
       return null
     }).catch(err => {
       console.log('Error getting user by id', err)
@@ -36,8 +49,9 @@ class userTuteeModel {
       email,
       password
     } = input;
-    console.log()
-    const connection = await Database.connect(req);
+    console.log(input)
+    const app = await Database.connect(req)
+    const connection = await app.zcql();
 
     let randomId;
     if (req){
@@ -71,10 +85,19 @@ class userTuteeModel {
   }
 
   static async delete( req, id ) {
-    const connection = await Database.connect(req);
+    const app = await Database.connect(req)
+    const connection = await app.zcql();
 
-    return await connection.executeZCQLQuery(`DELETE FROM userTutee WHERE idUT = ${id}`).then(queryResult => {
-      return {message: 'User Tutee deleted'}
+    return await connection.executeZCQLQuery(`DELETE FROM userTutee WHERE idUT like '${id}'`).then(queryResult => {
+      if(queryResult){
+        const valor = queryResult
+        const mapeado = queryResult[0].userTutee.DELETED_ROWS_COUNT
+        if(mapeado > 0)
+          return {message: `User Tutee deleted`}
+        else 
+        return {message: `User Tutee NOT DELETED`}
+          
+      }
     }).catch(err => {
       console.log("Error in delete Tutee", err)
     });
@@ -83,7 +106,8 @@ class userTuteeModel {
   
 
   static async update(req, id, input) {
-    const connection = await Database.connect(req);
+    const app = await Database.connect(req)
+    const connection = await app.zcql();
 
     if ( input.password ){
       input.password =  await bcrypt.hash( input.password , parseInt(process.env.SALT_ROUNDS )  )
@@ -105,15 +129,17 @@ class userTuteeModel {
     const setClause = keys.map(key => `${key} = ?`).join(', ');
 
 
-    try {
-      const [result] = await connection.query(
-        `UPDATE userTutee SET ${updateFields} WHERE idUT = ${id};`
-      ).then(queryResult => {
-        if(queryResult)
-          return queryResult
+      const query  = `UPDATE userTutee SET ${updateFields} WHERE idUT like '${id}'`
+      console.log(query)
+      const result = await connection.executeZCQLQuery(query).then(queryResult => {
+        if(queryResult){
+          const valor = queryResult
+          const mapeado = valor.map(item => item.userTutee)
+          return mapeado
+        }
         return null
       }).catch(err => {
-        console.log('Error in updating userTutee', err)
+        console.log('Error in upodate',err)
       });
 
       console.log( result );
@@ -122,23 +148,20 @@ class userTuteeModel {
       //   throw new Error('user tutee not found or no changes made');
       // }
   
-      
-      const [updatedUT] = await connection.executeZCQLQuery(
+      return await connection.executeZCQLQuery(
         `SELECT idUT, username , email, password
-         FROM userTutee WHERE idUT = ${id};`).then(queryResult => {
+         FROM userTutee WHERE idUT like '${id}';`).then(queryResult => {
           console.log(queryResult)
-          if(queryResult)
-            return queryResult
+          if(queryResult){
+            const valor = queryResult
+            const mapeado = valor.map(item=> item.userTutee)
+            return mapeado
+          }
           return null
          }).catch(err => {
           console.log('Error in getting userTutte', err)
          });
   
-      return updatedUT[0];
-    } catch (e) {
-      //console.log(e)
-      throw new Error('Error updating User Tutee');
-    }
   }
 
   static async login( req, username, password ) {
@@ -159,96 +182,17 @@ class userTuteeModel {
 
 
 
-  //NO HICE ASSIGNTASKSSSSS
-  static async asignTask( req, idTask , idUT , date ) {
-    
-    const connection = await Database.connect();
-    const [task] = await connection.query(`SELECT * FROM task WHERE idTask = ?;`, [ idTask ]);
-    
-    const findTask =  task[0]
- 
-    
-    if (!findTask )  throw new Error('task no found');
-
-    const [UT] = await connection.query(`SELECT * FROM userTutee WHERE idUT = ?;`, [ idUT ]);
-
-
-    const findUT = UT[0]
-    if (!findUT)  throw new Error('user tutee no found');
-
-    
-    try  {
-      await connection.query(
-        `INSERT INTO asingn_task (idUT, idTask , date , state ) 
-        VALUES (?, ?, ?, ?);`,
-        [ idUT, idTask , date , false ]
-      );
-    }catch (e){
-      console.log(e)
-      throw new Error('Error asigning task');
-    }
-
-    const [asign] = await connection.query(`SELECT * FROM asingn_task WHERE idTask = ? AND idUT = ?;`, [ idTask , idUT ]);
-    return asign[0];
-  }
-
-
-  // Edit Asigntask ME FALTQ ESTA MADRe
-  static async doneTask(req,  idTask , idUT , input ) {
-    
-    const connection = await Database.connect();
-    const [asignTask] = await connection.query(`SELECT * FROM asingn_task WHERE idTask = ? and idUT = ?;`, [ idTask , idUT]);
-    
-    const findAsignTask =  asignTask[0]
- 
-    
-    if (!findAsignTask )  throw new Error('AsignTask no found');
-
-    const keys = Object.keys(input);
-    const values = Object.values(input);
-    
-  
-    // Verificar si hay campos para actualizar
-    if (keys.length === 0) {
-      throw new Error('No fields to update');
-    }
-  
-    // Construir la consulta dinámicamente
-    const setClause = keys.map(key => `${key} = ?`).join(', ');
-
-
-    try {
-      const [result] = await connection.query(
-        `UPDATE asingn_task SET ${setClause}  WHERE idTask = ? and idUT = ?;`,
-        [...values, idTask , idUT]
-      );
-
-      console.log( result );
-  
-      if (result.affectedRows === 0) {
-        throw new Error('user tutee not found or no changes made');
-      }
-  
-      
-      const [updatedUT] = await connection.query(
-        `SELECT idUT, username , email, password
-         FROM userTutee WHERE idUT = ?;`,
-        [id]
-      );
-  
-      return updatedUT[0];
-    } catch (e) {
-      //console.log(e)
-      throw new Error('Error updating User Tutee');
-    }
-    
-  
-  }
   static async getROWIDTuTee(req, idUT){
-      const connection = Database.connect(req)
-      return await connection.executeZCQLQuery(`Select ROWID from userTutee where idUT = ${idUT}`).then(response => {
+    const app = await Database.connect(req)
+    const connection = await app.zcql();
+
+      return await connection.executeZCQLQuery(`Select ROWID from userTutee where idUT like '${idUT}'`).then(response => {
         // console.log('EL OTRO ROWID', response[0].userTutee.ROWID)
-        return response[0].userTutee.ROWID
+        if(response){
+          console.log('RETURN VALUE DE GETEOWIDTUTEE', response)
+          return response[0].userTutee.ROWID
+        }
+        return null
       }).catch(err => {
         console.log('Error in getROWIDTutee',err)
       })

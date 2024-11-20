@@ -1,0 +1,92 @@
+[debug] [2024-11-15T20:05:10.599Z] : 
+[debug] [2024-11-15T20:05:10.600Z] : ----------------------------------------------------------------------
+[debug] [2024-11-15T20:05:10.600Z] : Command:      /usr/bin/node /usr/local/bin/catalyst serve
+[debug] [2024-11-15T20:05:10.601Z] : CLI Version:  1.17.6
+[debug] [2024-11-15T20:05:10.601Z] : Platform:     linux
+[debug] [2024-11-15T20:05:10.601Z] : Node Version: v18.19.0
+[debug] [2024-11-15T20:05:10.602Z] : Time:         Fri Nov 15 2024 13:05:10 GMT-0700 (Mexican Pacific Standard Time)
+[debug] [2024-11-15T20:05:10.602Z] : ----------------------------------------------------------------------
+[debug] [2024-11-15T20:05:10.602Z] : 
+[debug] [2024-11-15T20:05:11.038Z] : > authorizing via signed-in user option
+[debug] [2024-11-15T20:05:11.039Z] : > command requires scopes: ["ZohoCatalyst.projects.ALL","ZohoCatalyst.functions.ALL","ZohoCatalyst.functions.EXECUTE","ZohoCatalyst.webapp.ALL","ZohoCatalyst.pdfshot.execute","ZohoCatalyst.authentication.CREATE"]
+[debug] [2024-11-15T20:05:11.050Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075 
+
+[debug] [2024-11-15T20:05:11.346Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 15 Nov 2024 20:05:11 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=4ead9897700827f973c0f7dbded7f673; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=3e8393c4-c788-45b5-8736-798aa4ee4b85;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=3e8393c4-c788-45b5-8736-798aa4ee4b85;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-11-15T20:05:11.350Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075/environment 
+
+[debug] [2024-11-15T20:05:11.589Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 15 Nov 2024 20:05:11 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=bbdfb771565421abbe10f7a180903d28; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=20496482-f5e4-4f09-b5d2-33287be5d941;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=20496482-f5e4-4f09-b5d2-33287be5d941;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-11-15T20:05:11.714Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075/function 
+Query params: {"type":"basicio,event,cron,applogic,integration,browser_logic"}
+
+[debug] [2024-11-15T20:05:12.152Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 15 Nov 2024 20:05:12 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=bbdfb771565421abbe10f7a180903d28; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=9505cb50-cfcd-4b68-9458-372480ee4021;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=9505cb50-cfcd-4b68-9458-372480ee4021;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-11-15T20:05:12.155Z] : unknown eol undefined hence skipping check
+[warn] [2024-11-15T20:05:14.921Z] : ⚠ skipping serve of function [package] since there is no valid catalyst-config.json file present
+[info] [2024-11-15T20:05:15.042Z] : 
+[info] [2024-11-15T20:05:15.042Z] :  >>>>>>>>>>>>> AdvancedIO <<<<<<<<<<<< 
+[info] [2024-11-15T20:05:15.043Z] : ℹ mind_leap_function: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-15T20:05:15.043Z] : 
+[info] [2024-11-15T20:06:49.454Z] : 
+change of src/controllers/userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-15T20:06:52.476Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-15T20:06:52.476Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-15T20:06:57.297Z] : 
+change of src/controllers/userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-15T20:07:00.232Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-15T20:07:00.233Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-15T20:08:37.852Z] : 
+change of src/controllers/userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-15T20:08:40.644Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-15T20:08:40.644Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-15T20:09:36.427Z] : 
+change of src/controllers/userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-15T20:09:39.268Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-15T20:09:39.268Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-15T20:13:22.536Z] : 
+change of src/controllers/userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-15T20:13:25.535Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-15T20:13:25.535Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-15T21:47:44.902Z] : 
+change of src/middleware/filestore.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-15T21:47:46.913Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-15T21:47:46.913Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[debug] [2024-11-15T21:47:54.429Z] : > refreshing access token <
+[debug] [2024-11-15T21:47:54.431Z] : >>>> HTTP REQUEST : POST https://accounts.zoho.com/oauth/v2/token 
+<request body omitted>
+
+[debug] [2024-11-15T21:47:54.844Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 15 Nov 2024 21:47:54 GMT","content-type":"application/json;charset=UTF-8","content-length":"1980","connection":"close","set-cookie":["zalb_b266a5bf57=a711b6da0e6cbadb5e254290f114a026; Path=/; Secure; HttpOnly","iamcsr=95b1d81f-f371-42fc-a07a-65b74260ce4a;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=95b1d81f-f371-42fc-a07a-65b74260ce4a;path=/;SameSite=Strict;Secure;priority=high"],"cache-control":"no-store","x-content-type-options":"nosniff","pragma":"no-cache","x-frame-options":"SAMEORIGIN","vary":"accept-encoding","content-language":"en-US","strict-transport-security":"max-age=63072000"}
+
+[info] [2024-11-15T21:50:15.611Z] : 
+change of src/middleware/filestore.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-15T21:50:17.624Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-15T21:50:17.624Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-15T21:51:03.277Z] : 
+change of src/middleware/filestore.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-15T21:51:05.286Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-15T21:51:05.286Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-15T21:52:28.212Z] : 
+change of src/middleware/filestore.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-15T21:52:30.253Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-15T21:52:30.253Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-15T21:53:08.174Z] : 
+change of src/middleware/filestore.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-15T21:53:10.201Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-15T21:53:10.201Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-15T21:53:28.207Z] : 
+change of src/middleware/filestore.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-15T21:53:30.170Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-15T21:53:30.171Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-15T21:54:06.946Z] : 
+change of src/middleware/filestore.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-15T21:54:09.021Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-15T21:54:09.021Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-15T21:55:07.497Z] : 
+change of src/controllers/userPrincipal.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-15T21:55:09.533Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-15T21:55:09.533Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/

@@ -1,5 +1,5 @@
 const express = require("express");
-const asignTaskRouter = express.Router();
+const assignTaskRouter = express.Router();
 const { asignTaskController } = require("../controllers/asignTask");
 
 
@@ -7,21 +7,21 @@ const { asignTaskController } = require("../controllers/asignTask");
 // Routes
 
 
-asignTaskRouter.get('/:idUT', asignTaskController.getAllbyUT )
+assignTaskRouter.get('/:idUT', asignTaskController.getAllbyUT )
 
-asignTaskRouter.get('/:idUT/:idTask', asignTaskController.getById )
+assignTaskRouter.get('/:idUT/:idTask', asignTaskController.getById )
 
-asignTaskRouter.post('/', asignTaskController.create )
+assignTaskRouter.post('/', asignTaskController.create )
 
-asignTaskRouter.delete('/:idUT/:idTask', asignTaskController.delete )
+assignTaskRouter.delete('/:idUT/:idTask', asignTaskController.delete )
 
-asignTaskRouter.put('/:idUT/:idTask', asignTaskController.update )
-
-
+assignTaskRouter.put('/:idUT/:idTask', asignTaskController.update )
 
 
 
 
 
 
-module.exports = asignTaskRouter
+
+
+module.exports = assignTaskRouter

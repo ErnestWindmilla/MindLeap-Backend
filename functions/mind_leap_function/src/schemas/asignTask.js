@@ -9,7 +9,7 @@ const asignTaskShema = z.object({
   idTask: z.string( {  required_error: 'idTask is required' , invalid_type_error: 'idTask must be a string'  }),
 
 
-  date: z.string({  required_error: 'date is required' , invalid_type_error: 'date must be a string'  } ),
+  dates: z.string({  required_error: 'date is required' , invalid_type_error: 'date must be a string'  } ),
   state : z.boolean({ required_error: 'state is required' , invalid_type_error: 'state must be a boolean'  })
 
   

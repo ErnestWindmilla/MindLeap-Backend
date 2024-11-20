@@ -1,12 +1,14 @@
 const  {  validateUser , validatePartialUser } = require('../schemas/user')
 const { userPrincipalModel } = require('../models/userPrincipal' )
 const jwt =  require( 'jsonwebtoken' )
-
+const catalyst = require('zcatalyst-sdk-node')
 // Files 
 const {upload , UPLOAD_DIR} = require('../middleware/upload'); 
 const fs = require('fs');
 const path = require('path');
-
+const { Filestore } = require("../middleware/filestore");
+const { json } = require('express');
+// const catalyst = require('zcatalyst-sdk-node')
 
 
 class userPrincipalController {
@@ -73,67 +75,48 @@ class userPrincipalController {
         res.status(200).send( true )
     }
 
+    static FileUpload(req, res) {
+        return new Promise((resolve, reject) => {
+          upload.single('file')(req, res, function (err) {
+            if (err) {
+              return reject(err);
+            }
+            // console.log(req.file)
+            resolve(req.file); // Resolver con los datos del archivo
+          });
+        });
+      }
     // update
     static async  update  (req,res)  {
-        console.log('update COntroller')
-        upload.single('file')(req, res, async function (err) {
-            console.log('update Function')
+        try{
+        const fileData = await userPrincipalController.FileUpload(req, res);
+        console.log('FILE', fileData)
+        const result = validatePartialUser( req.body )
+        console.log(fileData)
+        
+        const { id } = req.params
+        const currentUser = await userPrincipalModel.getById(req, id);
+        const app = catalyst.initialize(req)
+		const read = await fs.createReadStream(fileData.path)
+
+        await app.filestore().folder('26034000000054705').uploadFile({//Guardar la id del archivo en
+			code: read,
+			name: fileData.filename
+		}).catch(err => {
+			console.log('Error uploading data', err)
+		});
+
+        res.status(201).json(currentUser);
+    }catch (error) {
+        if (fileData) {
+                        console.log( "Borrando " , fileData.filename )
+                        fs.unlink(path.join(UPLOAD_DIR, fileData.filename), (err) => {
+                            if (err) console.error("Error al eliminar el archivo:", err);
+                        });
+                    }
+                    res.status(400).json({ error: error.message });
+    }
             
-            if (err) {
-                return res.status(400).json({ error: 'Error al subir el archivo.' });
-            }
-            
-            const result = validatePartialUser( req.body )
-            const { id } = req.params
-
-
-            if (!result.success) {
-                // 422 Unprocessable Entity
-                  return res.status(422).json({ error: JSON.parse(result.error.message) })
-            }       
-            
-
-            try {
-
-                const currentUser = await userPrincipalModel.getById(req, id);
-                if (!currentUser) {
-                    return res.status(404).json({ error: 'Usuario no encontrado.' });
-                }
-
-
-                // Verifica si se subió un archivo
-                const fileName = req.file ? req.file.filename : null;
-
-                // Agrega el nombre del archivo al objeto de datos si existe
-                const userUpdate = {
-                    ...result.data,
-                    ...(fileName ? { profileImg: fileName } : {})
-                    
-                };
-
-                const updatedUT = await  userPrincipalModel.update(req, id , userUpdate )
-
-                if (currentUser.profileImg && req.file) {
-                    console.log('Borrando Anterior ...')
-                    const previousImagePath = path.join(UPLOAD_DIR, currentUser.profileImg);
-                    fs.unlink(previousImagePath, (err) => {
-                        if (err) console.error("Error al eliminar la imagen anterior:", err);
-                    });
-                }
-
-
-                res.status(201).json(updatedUT)
-            } catch (error) {
-                
-                if (req.file) {
-                    console.log( "Borrando " , req.file )
-                    fs.unlink(path.join(UPLOAD_DIR, req.file.filename), (err) => {
-                        if (err) console.error("Error al eliminar el archivo:", err);
-                    });
-                }
-                res.status(400).json({ error: error.message });
-            }
-        });
     }
 
 
@@ -201,15 +184,6 @@ class userPrincipalController {
         res.status(200).json({ message: 'Sesión cerrada y cookies eliminadas' });
         
      }
-
-
-
- 
-
-   
-   
-
-
 }
 
 module.exports = { userPrincipalController };

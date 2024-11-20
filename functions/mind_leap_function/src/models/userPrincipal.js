@@ -2,20 +2,31 @@ const { Database } = require( "../middleware/conection")
 const bcrypt = require ('bcrypt')
 const crypto = require('crypto')
 class userPrincipalModel {
+
+
   static async getAll(req) {
-    const connection = await Database.connect(req);
+    const app = await Database.connect(req)
+    const connection = await app.zcql();
    return  await connection.executeZCQLQuery(`SELECT * FROM userPrincipal;`).then(queryResult => {
       console.log(queryResult)
-      
-        return queryResult;
+      if(queryResult)
+      {
+        const valor = queryResult
+        const mapeado = valor.map(item => item.userPrincipal)
+        return mapeado
+      }
+        return null;
   }).catch(err => {
     console.log('Error en getAll en UserPrincipalModel', err)
   })
   }
+
+
   static async getById( req, id ) {
-    const zcql = await Database.connect(req);
+    const app = await Database.connect(req)
+    const connection = await app.zcql();
     const query = `SELECT * FROM userPrincipal where userPrincipal.idUP = '${id}';`
-    const users = await zcql.executeZCQLQuery(query)
+    const users = await connection.executeZCQLQuery(query)
     if(users==false){
       console.log(users)
       console.log(id)
@@ -32,7 +43,8 @@ class userPrincipalModel {
       password
     } = input;
   
-    const connection = await Database.connect(req);
+    const app = await Database.connect(req)
+    const connection = await app.zcql();
     // console.log('SI HACE LA CONEXION', connection)
     let randomId;
     if (req){
@@ -52,45 +64,46 @@ class userPrincipalModel {
     
     return await connection.executeZCQLQuery(
       `SELECT idUP, username , email, password
-      FROM userPrincipal WHERE idUP = ${uuid};`,
-    ).catch(err => {
+      FROM userPrincipal WHERE idUP like '${uuid}';`,
+    ).then(response => {
+      const valor = response
+      const mapeado = response.map(item => item.userPrincipal)
+      return mapeado
+    }).catch(err => {
       console.log('New user show error', err)
     });
     
   }
 
   static async delete( req, id ) {
-    const zcql = await Database.connect(req);
-    let query = `SELECT * FROM userPrincipal WHERE idUP = ${id};`
-    return await zcql.executeZCQLQuery(query).then(
-      selectResult => {
-        const affectedRows = selectResult.length;
-        //Delete
-        console.log(affectedRows);
-        if(affectedRows === 0) return null
-        
-        query =  `DELETE FROM userPrincipal WHERE idUP = '${id}';`
-        zcql.executeZCQLQuery(query).then(updateResult => {
-          console.log(updateResult)
-          return { message: 'User Principal deleted successsfully' }
-        }).catch(err => {
-          console.log('Error in Delete query', err)
-        })
+    const app = await Database.connect(req)
+    const connection = await app.zcql();
+    console.log(id)
+    return await connection.executeZCQLQuery(`DELETE FROM userPrincipal WHERE idUP like '${id}'`).then(queryResult => {
+      if(queryResult){
+        const valor = queryResult
+        const mapeado = queryResult[0].userPrincipal.DELETED_ROWS_COUNT
+        if(mapeado > 0)
+          return {message: `User Principal deleted`}
+        else 
+        return {message: `User Principal NOT DELETED`}
+          
       }
-    ).catch(err => {
-      console.log('User Not Found', err)
+    }).catch(err => {
+      console.log("Error in delete Principal", err)
     });
 
 
   }
 
   static async update(req, id, input) {
-    const zcql = await Database.connect(req)
-  
+    const app = await Database.connect(req)
+    const connection = await app.zcql();
+    console.log('input', input)
       if ( input.password ){
         input.password =  await bcrypt.hash( input.password , parseInt(process.env.SALT_ROUNDS )  )
       }
-  
+      
       const keys = Object.keys(input);
       const values = Object.values(input);
       
@@ -100,37 +113,39 @@ class userPrincipalModel {
     
       const setClause = keys.map(key => `${key} = ?`).join(', ');
 
-      try {
+     
   
-     const query = `Select * FROM userPrincipal WHERE idUP = '${id}'`;
-   
+     const query = `Select * FROM userPrincipal WHERE idUP like '${id}'`;
+        console.log(query)
      const updateFields = Object.keys(input)
               .map(key => `${key} = '${input[key]}'`)
               .join(', ');
 
-        const [result] = await zcql.executeZCQLQuery(query).then(resultQuery => {
-            let cosa = `UPDATE userPrincipal SET ${updateFields} WHERE idUP = '${id}';`;
+        return await connection.executeZCQLQuery(query).then(resultQuery => {
+            let cosa = `UPDATE userPrincipal SET ${updateFields} WHERE idUP like '${id}';`;
             console.log(cosa)
-          let update = zcql.executeZCQLQuery(cosa).then(queryResult=>{
-            return queryResult
+            return connection.executeZCQLQuery(cosa).then(queryResult=>{
+            const valor = queryResult
+            const mapeado = valor.map(item=>item.userPrincipal)
+            console.log('Mapeado', mapeado[0])
+            return mapeado[0]
           }).catch(err => {
             console.log('Error in Update query', err);
           });
-          return update;
+          
           }).catch(err => {
             console.log('Error in select query:', err);
         });
         console.log(result)
         return result[0];
-      } catch (e) {
-          throw new Error('Error updating User Principal');
-      }
+
   }
 
 
   static async login( req, username, password ) {
 
-    const connection = await Database.connect(req);
+    const app = await Database.connect(req)
+    const connection = await app.zcql();
 
     return await connection.executeZCQLQuery(`SELECT * FROM userPrincipal WHERE username = '${username}';`).then(queryResult =>{
       
@@ -149,18 +164,16 @@ class userPrincipalModel {
 
   static async getROWIDuserPrincipal(req, idUP){
 
- 
-    const connection = await Database.connect(req);
-
-    // if(!idUP==null || idUP==undefined){
-    //   idUp = await connection
-    // }
+    const app = await Database.connect(req)
+    const connection = await app.zcql();
 
     return await connection.executeZCQLQuery(`select ROWID from userPrincipal where idUP like '${idUP}'`).then(response => { 
-    
-      let id = response[0].userPrincipal.ROWID
-      // console.log('DATOS DE GETROWIDUP', id)
-      return id
+      if(response){
+        console.log(response)
+        return response[0].userPrincipal.ROWID
+      }
+      return null
+
     
     }).catch(err => { console.log('Error in getROWID', err)})
   }

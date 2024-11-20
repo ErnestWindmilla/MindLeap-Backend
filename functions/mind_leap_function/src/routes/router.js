@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const userPrincipalRouter = require('./userPrincipal')
-const cors = require('cors');
+//const cors = require('cors');
 const UserTuteeRouter = require("./userTutee")
 const TaskRouter = require("./tasks" )
 const asignTaskRouter = require('./asingnTasks')

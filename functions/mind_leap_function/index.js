@@ -11,27 +11,28 @@ const cors = require('cors');
 
 const app = express()
 
-
+const allowedOrigins = 'http://localhost:8080'
 // Middleware para procesar los json
 app.use( express.json())
 app.use( cookieParser() )
 app.use(cors({
-	origin: 'http://localhost:8080',//'*',  // Cambia esto por el origen del frontend (dominio o puerto)
+	origin: 'http://localhost:8080', //'*',  // Cambia esto por el origen del frontend (dominio o puerto)
 	credentials: true ,
-	exposedHeaders: ['set-cookie']               // Permitir credenciales (como cookies) en solicitudes cross-origin
+	exposedHeaders: ['set-cookie'],               // Permitir credenciales (como cookies) en solicitudes cross-origin
+	// Access-Control-Allow-Origin : 'http://localhost:8080'
   }));
 
 // Ruta de prueba para verificar el acceso al archivo
-app.get('/test-file', cors(), (req, res) => {
-    const filePath = join(UPLOAD_DIR, 'NKW-1729720862886.jpg');
-    console.log(`Intentando servir el archivo: ${filePath}`);
-    res.sendFile(filePath, (err) => {
-        if (err) {
-            console.error("Error al enviar el archivo:", err);
-            res.status(404).send('Archivo no encontrado');
-        }
-    });
-});
+// app.get('/test-file', cors(), (req, res) => {
+//     const filePath = join(UPLOAD_DIR, 'NKW-1729720862886.jpg');
+//     console.log(`Intentando servir el archivo: ${filePath}`);
+//     res.sendFile(filePath, (err) => {
+//         if (err) {
+//             console.error("Error al enviar el archivo:", err);
+//             res.status(404).send('Archivo no encontrado');
+//         }
+//     });
+// });
 
 
  

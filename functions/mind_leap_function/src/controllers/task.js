@@ -158,11 +158,13 @@ class taskController {
     static async  update  (req,res)  {
         const result = validatePartialTask( req.body )
         const { id } = req.params
+        console.log('SI ENTRA AL CONTROLADOR DE UPDATE',id)
+        console.log('SUCCESS', result)
         if (!result.success) {
             // 422 Unprocessable Entity
               return res.status(422).json({ error: JSON.parse(result.error.message) })
         }       
-        
+        console.log('BEFORE TRY')
         try {
             console.log( result.data);
             const updatedTask = await  TaskModel.update(req, id , result.data )

@@ -1,0 +1,79 @@
+[debug] [2024-11-08T19:41:37.956Z] : 
+[debug] [2024-11-08T19:41:37.957Z] : ----------------------------------------------------------------------
+[debug] [2024-11-08T19:41:37.957Z] : Command:      /usr/bin/node /usr/local/bin/catalyst serve
+[debug] [2024-11-08T19:41:37.957Z] : CLI Version:  1.17.6
+[debug] [2024-11-08T19:41:37.958Z] : Platform:     linux
+[debug] [2024-11-08T19:41:37.958Z] : Node Version: v18.19.0
+[debug] [2024-11-08T19:41:37.958Z] : Time:         Fri Nov 08 2024 12:41:37 GMT-0700 (Mexican Pacific Standard Time)
+[debug] [2024-11-08T19:41:37.959Z] : ----------------------------------------------------------------------
+[debug] [2024-11-08T19:41:37.959Z] : 
+[debug] [2024-11-08T19:41:38.318Z] : > authorizing via signed-in user option
+[debug] [2024-11-08T19:41:38.319Z] : > command requires scopes: ["ZohoCatalyst.projects.ALL","ZohoCatalyst.functions.ALL","ZohoCatalyst.functions.EXECUTE","ZohoCatalyst.webapp.ALL","ZohoCatalyst.pdfshot.execute","ZohoCatalyst.authentication.CREATE"]
+[debug] [2024-11-08T19:41:38.327Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075 
+
+[debug] [2024-11-08T19:41:38.800Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 19:41:38 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=b14009a6059feb83ee8aa1c715a015c5; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=4de121b9-a638-48cc-a7c2-0148dc4e11ac;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=4de121b9-a638-48cc-a7c2-0148dc4e11ac;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-11-08T19:41:38.803Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075/environment 
+
+[debug] [2024-11-08T19:41:39.159Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 19:41:39 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=b14009a6059feb83ee8aa1c715a015c5; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=251ad526-adc8-4727-995d-5b83594e3930;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=251ad526-adc8-4727-995d-5b83594e3930;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-11-08T19:41:39.257Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075/function 
+Query params: {"type":"basicio,event,cron,applogic,integration,browser_logic"}
+
+[debug] [2024-11-08T19:41:39.820Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 08 Nov 2024 19:41:39 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"close","set-cookie":["zalb_46512fd555=bbdfb771565421abbe10f7a180903d28; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=a2bc83a1-7b22-4a2a-8002-1bd75cc7a882;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=a2bc83a1-7b22-4a2a-8002-1bd75cc7a882;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-11-08T19:41:39.823Z] : unknown eol undefined hence skipping check
+[warn] [2024-11-08T19:41:47.942Z] : ⚠ skipping serve of function [package] since there is no valid catalyst-config.json file present
+[info] [2024-11-08T19:41:47.956Z] : 
+change of src/models/catalyst-debug.log in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-08T19:41:48.061Z] : 
+[info] [2024-11-08T19:41:48.061Z] :  >>>>>>>>>>>>> AdvancedIO <<<<<<<<<<<< 
+[info] [2024-11-08T19:41:48.062Z] : ℹ mind_leap_function: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-08T19:41:48.062Z] : 
+[info] [2024-11-08T19:41:50.217Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-08T19:41:50.217Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-08T19:41:51.219Z] : 
+change of src/models/catalyst-debug.log in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-08T19:41:53.289Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-08T19:41:53.289Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-08T19:41:54.290Z] : 
+change of src/models/catalyst-debug.log in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-08T19:41:56.490Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-08T19:41:56.490Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-08T19:41:57.491Z] : 
+change of src/models/catalyst-debug.log in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-08T19:41:59.640Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-08T19:41:59.640Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-08T19:42:00.642Z] : 
+change of src/models/catalyst-debug.log in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-08T19:42:02.810Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-08T19:42:02.811Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-08T19:42:03.813Z] : 
+change of src/models/catalyst-debug.log in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-08T19:42:06.192Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-08T19:42:06.192Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-08T19:42:07.193Z] : 
+change of src/models/catalyst-debug.log in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-08T19:42:09.428Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-08T19:42:09.428Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-08T19:42:10.429Z] : 
+change of src/models/catalyst-debug.log in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-08T19:42:12.685Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-08T19:42:12.685Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-08T19:42:13.688Z] : 
+change of src/models/catalyst-debug.log in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-08T19:42:16.038Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-08T19:42:16.039Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-08T19:42:17.040Z] : 
+change of src/models/catalyst-debug.log in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-08T19:42:19.444Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-08T19:42:19.444Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-08T19:42:20.446Z] : 
+change of src/models/catalyst-debug.log in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-08T19:42:22.833Z] : ℹ AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-08T19:42:22.833Z] : ℹ AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-08T19:42:23.834Z] : 
+change of src/models/catalyst-debug.log in mind_leap_function detected. Preparing your function, please wait...
