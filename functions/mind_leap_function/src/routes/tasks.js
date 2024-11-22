@@ -17,7 +17,7 @@ if (!fs.existsSync(UPLOAD_DIR)) {
 
 // Serve static files (uploaded files) from the 'files' directory
 // This makes uploaded files accessible through URLs like '/files/filename.ext'
-TaskRouter.use('/files', express.static(UPLOAD_DIR));
+// TaskRouter.use('/files', express.static(UPLOAD_DIR));
 
 // Routes for Task operations
 
