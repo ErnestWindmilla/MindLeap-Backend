@@ -16,7 +16,7 @@ const connectionString = process.env.DATABASE_URL ?? DEFAULT_CONFIG;
 class Database {
   static async connect(req) {
     if (catalyst) {
-      const app = catalyst.initialize(req)
+      const app = await catalyst.initialize(req)
       // const zcql = app.zcql();
       // const file = app.filestore();
       

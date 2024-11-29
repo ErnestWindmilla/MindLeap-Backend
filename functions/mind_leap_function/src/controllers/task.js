@@ -156,6 +156,7 @@ class taskController {
 
     // update
     static async  update  (req,res)  {
+        console.log('input a entrar',req.body)
         const result = validatePartialTask( req.body )
         const { id } = req.params
         console.log('SI ENTRA AL CONTROLADOR DE UPDATE',id)

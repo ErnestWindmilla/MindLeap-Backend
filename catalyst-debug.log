@@ -1,0 +1,156 @@
+[debug] [2024-11-29T23:13:12.053Z] : 
+[debug] [2024-11-29T23:13:12.055Z] : ----------------------------------------------------------------------
+[debug] [2024-11-29T23:13:12.056Z] : Command:      C:\Program Files\nodejs\node.exe C:\Users\DELL DEV039\AppData\Roaming\npm\node_modules\zcatalyst-cli\lib\bin\catalyst.js serve
+[debug] [2024-11-29T23:13:12.056Z] : CLI Version:  1.17.6
+[debug] [2024-11-29T23:13:12.057Z] : Platform:     win32
+[debug] [2024-11-29T23:13:12.057Z] : Node Version: v21.7.1
+[debug] [2024-11-29T23:13:12.057Z] : Time:         Fri Nov 29 2024 17:13:12 GMT-0600 (hora estándar central)
+[debug] [2024-11-29T23:13:12.057Z] : ----------------------------------------------------------------------
+[debug] [2024-11-29T23:13:12.057Z] : 
+[debug] [2024-11-29T23:13:14.126Z] : > authorizing via signed-in user option
+[debug] [2024-11-29T23:13:14.126Z] : > command requires scopes: ["ZohoCatalyst.projects.ALL","ZohoCatalyst.functions.ALL","ZohoCatalyst.functions.EXECUTE","ZohoCatalyst.webapp.ALL","ZohoCatalyst.pdfshot.execute","ZohoCatalyst.authentication.CREATE"]
+[debug] [2024-11-29T23:13:14.144Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075 
+
+[debug] [2024-11-29T23:13:14.411Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 29 Nov 2024 23:13:14 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"keep-alive","set-cookie":["zalb_46512fd555=1ef23f2c9ba674cd1024eae6c2c1c249; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=07cbf0e8-a5db-4fdf-9f6f-d960360c55ef;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=07cbf0e8-a5db-4fdf-9f6f-d960360c55ef;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-11-29T23:13:14.428Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075/environment 
+
+[debug] [2024-11-29T23:13:14.518Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 29 Nov 2024 23:13:14 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"keep-alive","set-cookie":["zalb_46512fd555=90350078506ff735bb55acbaaf830ec7; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=0fff5ccf-8846-4684-a183-a7042e1f2906;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=0fff5ccf-8846-4684-a183-a7042e1f2906;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-11-29T23:13:15.085Z] : Build folder already exists, starting cleanup
+[debug] [2024-11-29T23:13:15.904Z] : >>>> HTTP REQUEST : GET https://api.catalyst.zoho.com/baas/v1/project/26034000000008075/function 
+Query params: {"type":"basicio,event,cron,applogic,integration,browser_logic"}
+
+[debug] [2024-11-29T23:13:16.018Z] : <<<< HTTP RESPONSE : 200
+Response Headers: {"server":"ZGS","date":"Fri, 29 Nov 2024 23:13:15 GMT","content-type":"application/vnd.catalyst.v2+json","transfer-encoding":"chunked","connection":"keep-alive","set-cookie":["zalb_46512fd555=a217ea28e1adda87f84f999a20258a4d; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=1e8ac4f4-f01d-4421-a1f5-59b8a4b4dd8f;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=1e8ac4f4-f01d-4421-a1f5-59b8a4b4dd8f;path=/;SameSite=Strict;Secure;priority=high"],"x-content-type-options":"nosniff","x-xss-protection":"1","cache-control":"private,no-cache,no-store,max-age=0,must-revalidate","pragma":"no-cache","expires":"Thu, 01 Jan 1970 00:00:00 GMT","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-11-29T23:13:16.021Z] : unknown eol undefined hence skipping check
+[warn] [2024-11-29T23:13:36.133Z] : ‼ skipping serve of function [package] since there is no valid catalyst-config.json file present
+[info] [2024-11-29T23:13:36.317Z] : 
+[info] [2024-11-29T23:13:36.318Z] :  >>>>>>>>>>>>> AdvancedIO <<<<<<<<<<<< 
+[info] [2024-11-29T23:13:36.319Z] : i mind_leap_function: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:13:36.319Z] : 
+[info] [2024-11-29T23:13:36.320Z] : 
+[info] [2024-11-29T23:13:36.320Z] :  >>>>>>>>>>>>> Web Client <<<<<<<<<<<<
+[info] [2024-11-29T23:13:36.321Z] : i client[client]: http://localhost:3000/app/
+[info] [2024-11-29T23:13:36.321Z] : 
+[info] [2024-11-29T23:14:56.647Z] : 
+change of src\models\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:15:22.798Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:15:22.799Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:15:23.802Z] : 
+change of src\models\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:15:46.684Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:15:46.685Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:17:49.222Z] : 
+change of src\controllers\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:18:15.576Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:18:15.577Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:18:16.590Z] : 
+change of src\controllers\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:18:37.341Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:18:37.341Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:22:24.896Z] : 
+change of src\controllers\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:22:52.996Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:22:52.996Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:22:54.009Z] : 
+change of src\controllers\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:23:27.137Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:23:27.137Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:23:28.146Z] : 
+change of src\controllers\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:23:52.547Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:23:52.548Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:23:53.581Z] : 
+change of src\controllers\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:24:17.340Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:24:17.341Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:24:18.354Z] : 
+change of src\controllers\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:24:51.898Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:24:51.899Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:24:52.906Z] : 
+change of src\controllers\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:25:20.854Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:25:20.855Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:25:21.871Z] : 
+change of src\controllers\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:25:46.229Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:25:46.230Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:26:18.295Z] : 
+change of src\controllers\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:26:42.882Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:26:42.882Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:26:43.890Z] : 
+change of src\controllers\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:27:01.436Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:27:01.437Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:27:06.917Z] : 
+change of src\controllers\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:27:23.874Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:27:23.874Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:28:55.494Z] : 
+change of src\controllers\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:29:25.009Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:29:25.009Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:29:26.028Z] : 
+change of src\controllers\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:29:53.268Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:29:53.269Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:29:54.277Z] : 
+change of src\controllers\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:30:20.714Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:30:20.715Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:30:21.730Z] : 
+change of src\controllers\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:30:48.977Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:30:48.978Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:30:50.043Z] : 
+change of src\controllers\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:31:08.717Z] : i AdvancedIO[mind_leap_function]: ready!
+[info] [2024-11-29T23:31:08.717Z] : i AdvancedIO[mind_leap_function]: http://localhost:3000/server/mind_leap_function/
+[info] [2024-11-29T23:31:09.724Z] : 
+change of src\controllers\taskArchive.js in mind_leap_function detected. Preparing your function, please wait...
+[info] [2024-11-29T23:31:11.004Z] : Shutting down server
+[debug] [2024-11-29T23:31:11.764Z] : client server closed
+[info] [2024-11-29T23:31:12.140Z] : 
+[info] [2024-11-29T23:31:12.141Z] : √ Shutdown complete
+[debug] [2024-11-29T23:31:12.142Z] : NO ERRORS REGISTERED
+[debug] [2024-11-29T23:31:12.142Z] : EXEC ENDED with event: serve, message: success
+[debug] [2024-11-29T23:31:12.142Z] : TOTAL DURATION OF COMMAND EXEC : 1078046
+[debug] [2024-11-29T23:31:12.178Z] : >>>> HTTP REQUEST : POST https://api.catalyst.zoho.com/baas/v1/cli/logs 
+<request body omitted>
+
+[error] [2024-11-29T23:31:12.215Z] : × An unexpected error has occurred.
+[debug] [2024-11-29T23:31:12.215Z] : Error Stack: CatalystError: An unexpected error has occurred.
+    at exports.default (C:\Users\DELL DEV039\AppData\Roaming\npm\node_modules\zcatalyst-cli\lib\errorOut.js:12:17)
+    at process.<anonymous> (C:\Users\DELL DEV039\AppData\Roaming\npm\node_modules\zcatalyst-cli\lib\bin\catalyst.js:90:28)
+    at process.emit (node:events:519:28)
+    at process.processEmit [as emit] (C:\Users\DELL DEV039\AppData\Roaming\npm\node_modules\zcatalyst-cli\node_modules\signal-exit\index.js:199:34)
+    at emit (node:internal/process/promises:150:20)
+    at processPromiseRejections (node:internal/process/promises:284:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:96:32)
+[debug] [2024-11-29T23:31:12.215Z] : Original Error: Error: [Error: ENOENT: no such file or directory, mkdir 'C:\Users\DELL DEV039\Documents\GitHub\MindLeap-Backend\.build\functions\mind_leap_function\src'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'mkdir',
+  path: 'C:\\Users\\DELL DEV039\\Documents\\GitHub\\MindLeap-Backend\\.build\\functions\\mind_leap_function\\src'
+}
+    at exports.default (C:\Users\DELL DEV039\AppData\Roaming\npm\node_modules\zcatalyst-cli\lib\errorOut.js:14:23)
+    at process.<anonymous> (C:\Users\DELL DEV039\AppData\Roaming\npm\node_modules\zcatalyst-cli\lib\bin\catalyst.js:90:28)
+    at process.emit (node:events:519:28)
+    at process.processEmit [as emit] (C:\Users\DELL DEV039\AppData\Roaming\npm\node_modules\zcatalyst-cli\node_modules\signal-exit\index.js:199:34)
+    at emit (node:internal/process/promises:150:20)
+    at processPromiseRejections (node:internal/process/promises:284:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:96:32)
+[debug] [2024-11-29T23:31:12.215Z] : Error Status: 500
+[info] [2024-11-29T23:31:12.216Z] : Kindly contact Catalyst support [support@zohocatalyst.com] if you need any further assistance
+[debug] [2024-11-29T23:31:12.690Z] : <<<< HTTP RESPONSE : 400
+Response Headers: {"server":"ZGS","date":"Fri, 29 Nov 2024 23:31:12 GMT","content-type":"application/json;charset=ISO-8859-1","content-length":"147","connection":"keep-alive","set-cookie":["zalb_46512fd555=1ef23f2c9ba674cd1024eae6c2c1c249; Path=/; Secure; HttpOnly","ZD_CSRF_TOKEN=22eefc98-177d-4c1a-b9ab-5297087fd67e;path=/;SameSite=None;Secure;priority=high","_zcsr_tmp=22eefc98-177d-4c1a-b9ab-5297087fd67e;path=/;SameSite=Strict;Secure;priority=high","JSESSIONID=1962EB7D71F440322B717B85C19C4098; Path=/; Secure; HttpOnly"],"x-content-type-options":"nosniff","x-xss-protection":"1","x-frame-options":"DENY","strict-transport-security":"max-age=63072000"}
+
+[debug] [2024-11-29T23:31:12.691Z] : Response Body : {"status":"failure","data":{"error_code":"INPUT_SIZE_MORE_THAN_ALLOWED","message":"Please check if the size of the input is in the correct range"}}
+
+[debug] [2024-11-29T23:31:12.692Z] : Unable to send debug log to server: HTTP Error: 400, Please check if the size of the input is in the correct range

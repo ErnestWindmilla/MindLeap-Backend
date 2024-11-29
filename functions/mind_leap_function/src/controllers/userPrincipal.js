@@ -9,7 +9,7 @@ const path = require('path');
 // const { Filestore } = require("../middleware/filestore");
 const { json } = require('express');
 // const catalyst = require('zcatalyst-sdk-node')
-
+const FOLDERID_USERPRINCIPAL = process.env.FOLDERID_USERPRINCIPAL
 
 class userPrincipalController {
 
@@ -86,17 +86,21 @@ class userPrincipalController {
           });
         });
       }
-    // update
     static async  update  (req,res)  {
+
+            // console.log('input a entrar',req.body)
         try{
-            //Se sube el archivo por medio del metodo FileUpload al SERVIDOR
-            const fileData = await userPrincipalController.FileUpload(req, res);
+            //Se sube el archivo por medio del metodo FileUpload al SERVIDOR no
+            const fileData = await userPrincipalController.FileUpload(req, res)
             if(fileData === undefined){
                 console.log('No se subio el archivo')
+
             }
+            console.log('Si se subio el archivo',fileData)
             const result = validatePartialUser( req.body )
             const { id } = req.params
             console.log('SI ENTRA AL CONTROLADOR DE UPDATE',id)
+            
             //Se checa si el archivo es valido
         if (!result.success) {
             // 422 Unprocessable Entity
@@ -105,39 +109,53 @@ class userPrincipalController {
         
         //Consigue el actual usuario
         const currentUser = await userPrincipalModel.getById(req, id);
+        console.log('Current user', currentUser)
         //Verifica si el usuario existe
         if (!currentUser) {
             return res.status(404).json({ error: 'Usuario no encontrado.' });
         }
 
         //Se inicializa el sdk y se guarda la ID del NUEVO ARCHIVO en CATALYST
+        let fileID
         const app = catalyst.initialize(req)
+
+        if (fileData){
+        
 		const read = await fs.createReadStream(fileData.path)
+        // console.log('read', read)
         // console.log('VALOR DE READ A VER SI SALE EL READSTREAM' ,read )
-        let fileID = await app.filestore().folder(FOLDERID_USERPRINCIPAL).uploadFile({//Guardar la id del archivo en
+        fileID = await app.filestore().folder(FOLDERID_USERPRINCIPAL).uploadFile({//Guardar la id del archivo en
 			code: read,
 			name: fileData.filename
 		}).catch(err => {
 			console.log('Error uploading data', err)
         }).then((fileOject) => {
-            console.log(fileOject)
+            console.log('fileObject',fileOject)
             return fileOject.id
         });
-
+    }
+        console.log('FILE ID',fileID)
         const userUpdate = {
             ...result.data,
             ...(fileID ? { profileImg: fileID } : {})   
         };
-        console.log('Si llega hasta aca')
+        console.log('Si llega hasta aca',req.body)
         const updateFinal = await userPrincipalModel.update(req, id , userUpdate)
         let eraseFile
             console.log('Se intenta borrar el archivo')
             //Se borra el archivo anterior 
-            eraseFile = await app.filestore().folder(FOLDERID).deleteFile(currentUser.profileImg).catch(err => {
+            if(currentUser.profileImg && fileData)
+            eraseFile = await app.filestore().folder(FOLDERID_USERPRINCIPAL).deleteFile(currentUser.profileImg).catch(err => {
                 console.log('No existia imagen antes, o error al borrar imagen anterior', err)
             })
             if(eraseFile){ console.log('SE ha eliminado el archivo ')}
-        
+            if(fileData){
+                console.log('Se intenta borrar el archivo local')
+            await fs.unlink(fileData.path, (err) =>{
+                if(err) console.log('Error al borrar el archivo local', err)
+                    else {
+                        console.log('Se ha borrado el archivo local')}
+            })}
         res.status(201).json(updateFinal);
     }catch (error) {
         // if (fileData) {

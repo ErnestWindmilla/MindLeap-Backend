@@ -5,6 +5,7 @@ const { userPrincipalModel } = require("../models/userPrincipal")
 const crypto = require('crypto')
 const fs = require('fs');
 const path = require('path');
+const FOlDERID = process.env.FOLDERID_TASK
 class TaskModel {
   static async getAll(req) {
 
@@ -23,18 +24,21 @@ class TaskModel {
     })
   }
 
+  //ya esta esta vaina
   static async getById( req, id ) {
-    
+    console.log('ENtra al modelo de getById')
+  
     // const valor = await userPrincipalModel.getROWIDuserPrincipal(req, id)
     const app = await Database.connect(req);
     const connection = await app.zcql()
-    let query = `SELECT * FROM task WHERE idTask = ${id};`; ////CAMBIAR EL QUERY PARA EVItAR INYECCIONES SQL 
+    let query = `SELECT * FROM task WHERE idTask = '${id}';`; ////CAMBIAR EL QUERY PARA EVItAR INYECCIONES SQL 
+    console.log(query)
     return await connection.executeZCQLQuery(query).then(queryResult => {
       if(!(queryResult===0)) { 
         const valor = queryResult
         const mapeado = valor.map(item => item.task)
-        
-        return mapeado
+        console.log(mapeado)
+        return mapeado[0]
       }
         
       else { 

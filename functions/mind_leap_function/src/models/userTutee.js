@@ -31,9 +31,9 @@ class userTuteeModel {
     const connection = await app.zcql();
     return await connection.executeZCQLQuery(`SELECT * FROM userTutee WHERE idUT = '${value}'`).then(queryResult => {
       if(queryResult){
-        const valor = queryResult
-        const mapeado = valor.map(item => item.userTutee)
-        return mapeado
+        // const valor = queryResult
+        console.log(queryResult[0].userTutee)
+        return queryResult[0].userTutee;
       }
       return null
     }).catch(err => {
@@ -166,14 +166,18 @@ class userTuteeModel {
 
   static async login( req, username, password ) {
 
-    const connection = await Database.connect(req);
+    const app = await Database.connect(req);
+    const connection = await app.zcql();
     return await connection.executeZCQLQuery(`SELECT * FROM userTutee WHERE username = '${username}';`).then( queryResult => {
       if(!queryResult) throw new  Error('User Not Found')
-      const isValid = bcrypt.compare(password, queryResult.password)
-      console.log(queryResult)
-      if(!isValid) throw new Error('Password Incorrect')
+        // console.log(queryResult[0].userTutee.password)
+        // console.log('Password', password, ' The other password', queryResult.password)
+        // console.log(queryResult)
+     const isValid = bcrypt.compare(password, queryResult[0].userTutee.password)
+      console.log(queryResult[0].userTutee)
+      // if(!isValid) throw new Error('Password Incorrect')
       
-      return queryResult
+      return queryResult[0].userTutee
     }).catch(err => {
       console.log('Error in select query', err)
     });

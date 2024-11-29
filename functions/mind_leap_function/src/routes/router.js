@@ -6,6 +6,7 @@ const UserTuteeRouter = require("./userTutee")
 const TaskRouter = require("./tasks" )
 const asignTaskRouter = require('./asingnTasks')
 const assignMasterRouter = require('./assignMaster')
+const TaskArchiveRouter = require('./taskArchive')
 const fs = require('fs');
 const { sessionInfo } = require('../middleware/sessionInfo' )
 const { join } = require('path');
@@ -44,16 +45,6 @@ router.use('/files/:id',(async (req, res) => {
         const nombreFinal = req.params.id
         console.log('Nombre del archivo = ',nombre, '\n Tipo de archivo = ',terminacion)
     const fileBuffer = await app.filestore().folder(FOLDERID).downloadFile(req.params.id);
-    
-    // const fileType = mime.getType(fileBuffer)
-    // res.setHeader('Content-Type', fileType)
-        //Crea un blob
-        //Creabun createobjectURL con ese blob
-        // const blob = new Blob([fileBuffer], { type: "image/jpeg" });
-        //   console.log('BLOB CREADO', blob.type)
-        //   const urlBlob = URL.createObjectURL(blob);
-        //   console.log('URL CREADA', urlBlob)
-        res.setHeader('Content-Type', 'application/octet-stream')
         res.status(200).setHeader('Connection', 'Keep-Alive').send(fileBuffer)//.sendFile(path.resolve(filePath))
 } catch (error) {
         console.log('Error en obtener el archivo',error)
@@ -68,5 +59,6 @@ router.use('/asignTask' ,asignTaskRouter )
 router.use('/assignMaster' , assignMasterRouter )
 router.use('/userTutee' , UserTuteeRouter)
 router.use('/task' , TaskRouter )
+router.use('/taskArchive' , TaskArchiveRouter )
 
 module.exports = router

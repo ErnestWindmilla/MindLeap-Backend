@@ -13,19 +13,19 @@ const upload = multer({
             cb(null, uniqueSuffix + path.extname(file.originalname)); // Nombre único para el archivo
         },
     }),
-    // limits: {
-    //     fileSize: 10000000, // Tamaño máximo del archivo en bytes (10 MB)
-    // },
-    // fileFilter: (req, file, cb) => {
-    //     const allowedTypes = /jpeg|jpg|png|pdf|mp4/;
-    //     const mimeType = allowedTypes.test(file.mimetype);
-    //     const extName = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-
-    //     if (mimeType && extName) {
-    //         return cb(null, true);
-    //     }
-    //     cb(new Error('Tipo de archivo no soportado. Solo se permiten imágenes, PDF y MP4.'));
-    // },
 });
+//Intento se dubir varios archivo en mullter
+// const mullti_upload = multer({ storage,
+//     limits: { fileSize: 1024 * 1024 }, //1MB
+//     fileFilter: (reqmfile, cb) => {
+//         if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+//             cb(null, true);
+//         } else {
+//             cb(null, false); 
+//             const err = new Error('Only .png, .jpg and .jpeg format allowed!');
+//             err.name
+//             return cb(err)
+//             // return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+//         }}.array('uploadImnages', 2) })
 
 module.exports = {upload , UPLOAD_DIR};

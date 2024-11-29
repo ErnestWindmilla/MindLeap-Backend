@@ -23,7 +23,15 @@
           "id": "867722913",
           "name": "Development",
           "type": 3,
-          "Hola": "hola"
+          "Hola": "hola",
+          "env_status": "Active",
+          "project_details": {
+            "project_name": "MindLeap",
+            "id": "26034000000008075",
+            "project_type": "Live"
+          },
+          "is_default": true,
+          "action_required": false
         }
       ]
     }
